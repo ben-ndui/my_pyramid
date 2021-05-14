@@ -142,9 +142,6 @@ class PlayController {
           nextScreenMessage: "Aller hop, \n PYRAMID TIME !!!",
           gameDeck: this.gameDeck,
           currPlayer: this.currPlayer,
-          currentPlayer: this.currentPlayer,
-          card: this.card,
-          currentCard: this.card.cardSymbole,
         );
         break;
       default:

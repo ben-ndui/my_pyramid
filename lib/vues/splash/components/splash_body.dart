@@ -12,23 +12,26 @@ class _SplashBodyState extends State<SplashBody> {
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
     return Stack(
+      alignment: Alignment.center,
       children: [
-        PageView.builder(
-          itemCount: splashList.length,
-          itemBuilder: (context, index) {
-            return GestureDetector(
-              child: Container(
-                width: size.width,
-                height: size.height,
-                child: Image.asset(
-                  "assets/splashScreens/${splashList[index].name}.jpg",
-                  width: size.width,
-                  height: size.height,
-                  fit: BoxFit.cover,
+        Container(
+          width: size.width,
+          height: size.height,
+          child: PageView.builder(
+            itemCount: splashList.length,
+            itemBuilder: (context, index) {
+              return GestureDetector(
+                child: Container(
+                  child: Image.asset(
+                    "assets/splashScreens/${splashList[index].name}.jpg",
+                    width: size.width,
+                    height: size.height,
+                    fit: BoxFit.cover,
+                  ),
                 ),
-              ),
-            );
-          },
+              );
+            },
+          ),
         ),
         Container(
           alignment: Alignment.bottomCenter,

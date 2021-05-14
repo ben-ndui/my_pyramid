@@ -13,6 +13,7 @@ class _SplashScreenState extends State<SplashScreen> {
     return Scaffold(
       body: Container(
         child: Stack(
+          alignment: Alignment.center,
           children: [
             SplashBody(),
           ],
