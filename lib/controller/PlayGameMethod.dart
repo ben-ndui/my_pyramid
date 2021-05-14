@@ -142,6 +142,9 @@ class PlayController {
           nextScreenMessage: "Aller hop, \n PYRAMID TIME !!!",
           gameDeck: this.gameDeck,
           currPlayer: this.currPlayer,
+          currentPlayer: this.currentPlayer,
+          card: this.card,
+          currentCard: this.card.cardSymbole,
         );
         break;
       default:
@@ -388,7 +391,6 @@ class PlayController {
       String nextScreenName,
       int tour,
       int currPlayerr) async {
-    int index = 0;
     switch (tour) {
       case 1:
         for (Player player in this.playersList) {
@@ -408,7 +410,7 @@ class PlayController {
                   secondBtnImageURL:
                       "assets/backgrounds/components/blackChoice.png",
                   nextScreenName: nextScreenName,
-                  nextScreenMessage: "Plus ou Moins ?",
+                  nextScreenMessage: "Plus ou Moins \n Que ta carte précédente ? \n Tu peux désormais voir tes cartes, n'oublie pas !",
                   gameDeck: this.gameDeck,
                   currPlayer: this.currPlayer,
                 ),
@@ -460,7 +462,7 @@ class PlayController {
                   secondBtnImageURL:
                       "assets/backgrounds/components/out-btn.png",
                   nextScreenName: nextScreenName,
-                  nextScreenMessage: "Devine la symbole des cartes!!!",
+                  nextScreenMessage: "Pique, Trefle, Careau \n ou Coeur ?",
                   gameDeck: this.gameDeck,
                   currPlayer: this.currPlayer,
                 ),
