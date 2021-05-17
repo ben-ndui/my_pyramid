@@ -40,7 +40,7 @@ class _SplashBodyState extends State<SplashBody> {
             style: TextButton.styleFrom(
               padding: EdgeInsets.all(5),
               shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.all(Radius.circular(16)),
+                borderRadius: BorderRadius.all(Radius.circular(50)),
               ),
               backgroundColor: Colors.black,
             ),
@@ -68,10 +68,15 @@ class _SplashBodyState extends State<SplashBody> {
                 ),
               );
             },
-            child: Text(
-              "Jouer",
-              style: TextStyle(
-                color: Colors.white,
+            child: Container(
+              width: 150,
+              child: Text(
+                "Jouer",
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 50,
+                ),
               ),
             ),
           ),

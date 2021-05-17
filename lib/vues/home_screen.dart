@@ -1,16 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:my_pyramid/vues/jouer/components/customDialogBox.dart';
+import 'components/background.dart';
 import 'components/cardScrollWidget.dart';
 import 'components/data.dart';
-import 'intermediaire/inter.dart';
 import 'jouer/jouer.dart';
+import 'loader/loader.dart';
 
 class Home extends StatefulWidget {
   @override
   _HomeState createState() => _HomeState();
 }
-
-var cardAspectRatio = 12.0 / 16.0;
-var widgetAspectRatio = cardAspectRatio * 1.3;
 
 class _HomeState extends State<Home> {
   var currentPage = images.length - 1.0;
@@ -45,7 +44,9 @@ class _HomeState extends State<Home> {
         alignment: Alignment.center,
         child: Stack(
           children: [
-            CardScrollWidget(currentPage),
+            HomeBackgroundv2(homeBackURL: "assets/video/beer3.gif"),
+            AnimeBackground(imageURL: "assets/video/home6.gif"),
+            Center(child: CardScrollWidget(currentPage)),
             Positioned.fill(
               child: PageView.builder(
                 itemCount: images.length,
@@ -79,39 +80,27 @@ class _HomeState extends State<Home> {
                               ));
                           break;
                         case 1:
-                          Navigator.push(
-                            context,
-                            PageRouteBuilder(
-                              transitionDuration: Duration(
-                                milliseconds: 1000,
-                              ),
-                              transitionsBuilder:
-                                  (context, animation, animationTime, child) {
-                                animation = CurvedAnimation(
-                                  parent: animation,
-                                  curve: Curves.elasticInOut,
-                                );
-                                return ScaleTransition(
-                                  alignment: Alignment.center,
-                                  scale: animation,
-                                  child: child,
-                                );
-                              },
-                              pageBuilder: (context, animation, animationTime) {
-                                //Il faut faire la meme chose dans connexion body
-                                return Inter();
-                              },
-                            ),
+                          showDialog(
+                            context: context,
+                            builder: (BuildContext context) {
+                              return CustomDialogBox(
+                                title: "👻",
+                                descriptions:
+                                "Bientôt disponible !! 👊",
+                                text: "Okay",
+                              );
+                            },
                           );
                           break;
                         case 0:
                           if (isActive == false) {
                             setState(() {
-                              xOffset = 150;
+                              xOffset = 300;
                               yOffset = 50;
                               scaleFactor = 0.9;
                             });
                             isActive = true;
+                            return CustomDialogBox(title: 'Config', text: 'Manage your game',);
                           } else {
                             setState(() {
                               xOffset = 0;
@@ -126,7 +115,7 @@ class _HomeState extends State<Home> {
                       }
                     },
                     child: Container(
-                      child: Text(""),
+                      child: Text(''),
                     ),
                   );
                 },

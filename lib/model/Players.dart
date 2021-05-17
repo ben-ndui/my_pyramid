@@ -9,7 +9,7 @@ import 'GameDeck.dart';
 class Player {
   String name;
   PlayController playController;
-  List<CardDeck> deck = new List();
+  List<CardDeck> deck = [];
 
   Player(
     String name,
@@ -33,13 +33,13 @@ class Player {
     );
   }
 
+  ///
+  /// Add card to current player deck
   void addCard(CardDeck card) {
     this.deck.add(card);
   }
 
-  /**
-   * Cett fonction retour le nombre de carte présent dans le deck
-   */
+  /// Cette fonction retour le nombre de carte présent dans le deck
   int getDeckLength() {
     return this.deck.length;
   }
@@ -248,4 +248,4 @@ class Player {
   }
 }
 
-List<Player> playersLists = new List<Player>();
+List<Player> playersLists = [];

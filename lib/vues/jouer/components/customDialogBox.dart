@@ -48,14 +48,14 @@ class _CustomDialogBoxState extends State<CustomDialogBox> {
             children: <Widget>[
               Text(
                 widget.title,
-                style: TextStyle(fontSize: 22, fontWeight: FontWeight.w600),
+                style: TextStyle(fontSize: 30, fontWeight: FontWeight.w600),
               ),
               SizedBox(
                 height: 15,
               ),
               Text(
                 widget.descriptions,
-                style: TextStyle(fontSize: 14),
+                style: TextStyle(fontSize: 25),
                 textAlign: TextAlign.center,
               ),
               SizedBox(
@@ -63,13 +63,20 @@ class _CustomDialogBoxState extends State<CustomDialogBox> {
               ),
               Align(
                 alignment: Alignment.bottomRight,
-                child: FlatButton(
+                child: TextButton(
                     onPressed: () {
                       Navigator.of(context).pop();
                     },
+                    style: ButtonStyle(backgroundColor: MaterialStateProperty.resolveWith<Color>(
+                          (Set<MaterialState> states) {
+                        if (states.contains(MaterialState.pressed))
+                          return Colors.white30;
+                        return null; // Use the component's default.
+                      },
+                    ),),
                     child: Text(
                       widget.text,
-                      style: TextStyle(fontSize: 18),
+                      style: TextStyle(fontSize: 50, color: Colors.grey.withOpacity(0.5)),
                     )),
               ),
             ],

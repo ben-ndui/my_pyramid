@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:my_pyramid/model/CardDeck.dart';
 import 'package:my_pyramid/model/Players.dart';
@@ -26,10 +24,10 @@ class DisplayQuestion extends StatelessWidget {
         scrollable: true,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
         content: Stack(
+          alignment: Alignment.center,
           children: [
             Container(
               padding: EdgeInsets.all(10),
-              height: MediaQuery.of(context).size.height / 2,
               decoration: BoxDecoration(
                 border: Border.all(
                   color: Colors.transparent,
@@ -38,30 +36,45 @@ class DisplayQuestion extends StatelessWidget {
                 color: Colors.white,
               ),
               child: Stack(
+                alignment: Alignment.center,
                 children: [
                   Center(child: card.img),
-                  Container(
-                    margin: EdgeInsets.only(
-                        top: MediaQuery.of(context).size.width / 4),
-                    height: MediaQuery.of(context).size.width / 2,
-                    color: Colors.white.withOpacity(0.8),
-                    child: Center(
+                  Center(
+                    child: Container(
+                      alignment: Alignment.center,
+                      padding: EdgeInsets.all(10),
+                      decoration: BoxDecoration(color: Colors.white,boxShadow: [BoxShadow(color: Colors.grey, offset: Offset.infinite, blurRadius: 1.0, spreadRadius: 1.0), BoxShadow(color: Colors.grey, offset: Offset.infinite, blurRadius: 1.0, spreadRadius: 1.0)]),
                       child: Padding(
-                        padding: const EdgeInsets.all(15.0),
+                        padding: const EdgeInsets.all(5.0),
                         child: ClipRRect(
-                          borderRadius: BorderRadius.circular(30.0),
-                          child: Text(
-                            "${randomPlayer.name} " +
-                                "\n" +
-                                text +
-                                "\n" +
-                                " " +
+                          child: Column(
+                            children: [
+                              Text(
+                                    '🏌🏻‍♂️'+text +'🏌🏻‍♂️'
+                                    "\n\n" +
+                                        "${randomPlayer.name} " +
+                                        "\n" +
+                                    " " ,
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                  color: Colors.deepPurple,
+                                  fontSize: 20,
+                                  fontFamily: 'Helvetica',
+                                  fontWeight: FontWeight.bold
+                                ),
+                              ),
+                              SizedBox(height: 10,),
+                              Text(
                                 description,
-                            textAlign: TextAlign.center,
-                            style: TextStyle(
-                              color: Color(0xFF3A3238),
-                              fontSize: 13.0,
-                            ),
+                                textAlign: TextAlign.justify,
+                                style: TextStyle(
+                                    color: Colors.black,
+                                    fontSize: 20,
+                                    fontFamily: 'Helvetica',
+                                    fontWeight: FontWeight.w500,
+                                ),
+                              ),
+                            ],
                           ),
                         ),
                       ),

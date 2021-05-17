@@ -152,7 +152,7 @@ class _GameBodyState extends State<GameBody> {
                 onPressed: () {
                   Navigator.of(context).pop();
                 },
-                child: Text("🍺"),
+                child: Text("🍺", style: TextStyle(fontSize: 35),),
               ),
             ],
           ),
@@ -172,7 +172,7 @@ class _GameBodyState extends State<GameBody> {
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   color: Colors.white,
-                  fontSize: 25,
+                  fontSize: 50,
                   fontWeight: FontWeight.w200,
                 ),
               ),
@@ -216,8 +216,8 @@ class _GameBodyState extends State<GameBody> {
                   this.gameDeck.gameDeck.remove(card);
                   this.playController.isWinOrNot(
                         card,
-                        "Yes Brothaaa \n Tu as gagné, distribue $tour a qui tu veux !!",
-                        "Bruuh.. \n Vas-y prends $tour verre",
+                        "Yes Brothaaa \n\n Tu as gagné, distribue $tour a qui tu veux !!",
+                        "Bruuh.. \n\n Vas-y prends $tour verre",
                         nextScreenMessage,
                         context,
                         nextScreenName,
@@ -255,8 +255,8 @@ class _GameBodyState extends State<GameBody> {
                   this.gameDeck.gameDeck.remove(card);
                   this.playController.isWinOrNot(
                         card,
-                        "Yes Brothaaa \n Tu as gagné, distribue $tour a qui tu veux !!",
-                        "Bruuh.. \n Vas-y prends $tour verre",
+                        "Yes Brothaaa \n\n Tu as gagné, distribue $tour a qui tu veux !!",
+                        "Bruuh.. \n\n Vas-y prends $tour verre",
                         nextScreenMessage,
                         context,
                         nextScreenName,
@@ -287,20 +287,19 @@ class _GameBodyState extends State<GameBody> {
 
   Expanded displayCard(BuildContext context, Image image) {
     return Expanded(
-      child: Container(
-        // color: Colors.green,
-        margin: EdgeInsets.only(
-          top: 50.0,
+      child: Center(
+        child: Container(
+          // color: Colors.green,
+          padding: EdgeInsets.only(
+            left: 5.0,
+            right: 5.0,
+          ),
+          // color: Colors.green,
+          alignment: Alignment.center,
+          width: MediaQuery.of(context).size.height / 3,
+          height: MediaQuery.of(context).size.height / 3,
+          child: image,
         ),
-        padding: EdgeInsets.only(
-          left: 5.0,
-          right: 5.0,
-        ),
-        // color: Colors.green,
-        alignment: Alignment.center,
-        width: MediaQuery.of(context).size.height / 3,
-        height: MediaQuery.of(context).size.height / 3,
-        child: image,
       ),
     );
   }

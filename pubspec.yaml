@@ -11,17 +11,24 @@ dependencies:
   cupertino_icons: ^1.0.3
   flutter_spinkit: ^5.0.0
   flutter_svg: ^0.22.0
+  lite_rolling_switch: ^0.1.1
 dev_dependencies:
   flutter_test:
     sdk: flutter
 flutter:
   uses-material-design: true
   assets:
-  - assets/
-  - assets/backgrounds/
-  - assets/backgrounds/components/
-  - assets/cards/
-  - assets/home/
-  - assets/home/components/
-  - assets/splashScreens/
-  - assets/video/
+    - assets/
+    - assets/backgrounds/
+    - assets/backgrounds/components/
+    - assets/cards/
+    - assets/home/
+    - assets/home/components/
+    - assets/splashScreens/
+    - assets/video/
+  fonts:
+    - family: Stella
+      fonts:
+        - asset: fonts/Stella.otf
+        - asset: fonts/Stella.ttf
+

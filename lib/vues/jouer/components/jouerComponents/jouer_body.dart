@@ -60,15 +60,14 @@ class _JouerBodyState extends State<JouerBody> {
               },
               onSubmitted: (value) {
                 temp = value;
-                setState(() {
                   addPlayer(context);
-                });
               },
               cursorColor: Colors.white,
               cursorHeight: 25.0,
               textAlign: TextAlign.center,
               style: TextStyle(
                 color: Colors.white,
+                fontSize: 30,
               ),
               controller: _controller,
               decoration: InputDecoration(
@@ -76,7 +75,7 @@ class _JouerBodyState extends State<JouerBody> {
                 fillColor: Colors.white,
                 labelStyle: TextStyle(
                   color: Colors.white,
-                  fontSize: 18,
+                  fontSize: 40,
                 ),
                 enabledBorder: UnderlineInputBorder(
                   borderSide: BorderSide(
@@ -92,11 +91,9 @@ class _JouerBodyState extends State<JouerBody> {
                   children: [
                     IconButton(
                       color: Colors.white,
-                      icon: Icon(Icons.add),
+                      icon: Icon(Icons.add, size: 30,),
                       onPressed: () {
-                        setState(() {
-                          addPlayer(context);
-                        });
+                        addPlayer(context);
                       },
                     ),
                     IconButton(
@@ -176,7 +173,7 @@ class _JouerBodyState extends State<JouerBody> {
           ),
           Container(
             margin:
-                EdgeInsets.only(top: size.height/6.3),
+                EdgeInsets.only(top: size.height/5),
             // color: Colors.green,
             height: MediaQuery.of(context).size.height,
             child: ListView.builder(
@@ -192,8 +189,8 @@ class _JouerBodyState extends State<JouerBody> {
                         backgroundColor:
                             Colors.brown[playersList[index].hashCode],
                       ),
-                      title: Text(playersList[index].name),
-                      subtitle: Text('Let\'s get it'),
+                      title: Text(playersList[index].name, style: TextStyle(fontSize: 45,)),
+                      subtitle: Text('Let\'s get it', style: TextStyle(fontSize: 25,),),
                       trailing: TextButton(
                         onPressed: () {
                           removePlayer(playersList[index]);
@@ -216,17 +213,79 @@ class _JouerBodyState extends State<JouerBody> {
               style: TextButton.styleFrom(
                 padding: EdgeInsets.all(5),
                 shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.all(Radius.circular(16)),
+                  borderRadius: BorderRadius.all(Radius.circular(50)),
                 ),
                 backgroundColor: Colors.black,
               ),
               onPressed: () {
-
+                setState(
+                      () {
+                    this.gameDeck.initDeck();
+                    if (this.playersList.length > 0) {
+                      Navigator.push(
+                        context,
+                        PageRouteBuilder(
+                          transitionDuration: Duration(
+                            milliseconds: 1000,
+                          ),
+                          transitionsBuilder: (context, animation,
+                              animationTime, child) {
+                            animation = CurvedAnimation(
+                              parent: animation,
+                              curve: Curves.elasticInOut,
+                            );
+                            return ScaleTransition(
+                              alignment: Alignment.center,
+                              scale: animation,
+                              child: child,
+                            );
+                          },
+                          pageBuilder:
+                              (context, animation, animationTime) {
+                            return GameScreen(
+                              playersList: this.playersList,
+                              tour: 1,
+                              nextScreen: this.nextScreen,
+                              nextScreenBackground:
+                              "assets/backgrounds/fisrt.png",
+                              firstBtnImageURL:
+                              "assets/backgrounds/components/redChoice.png",
+                              secondBtnImageURL:
+                              "assets/backgrounds/components/blackChoice.png",
+                              nextScreenName: "PlusOuMoinsScreen",
+                              nextScreenMessage:
+                              "Allez hop, \n PLUS or MINUS !!",
+                              gameDeck: this.gameDeck,
+                              currPlayer: 0,
+                            );
+                          },
+                        ),
+                      );
+                    } else {
+                      showDialog(
+                        context: context,
+                        builder: (BuildContext context) {
+                          return CustomDialogBox(
+                            title: "Bruuuh",
+                            descriptions:
+                            "On peut pas jouer la, tu n'as entré aucun joueur.. ",
+                            text: "Okay",
+                          );
+                        },
+                      );
+                    }
+                  },
+                );
               },
-              child: Text(
-                "Jouer",
-                style: TextStyle(
-                  color: Colors.white,
+              child: Container(
+                width: 150,
+                child: Text(
+                  "Jouer",
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 40,
+                  ),
                 ),
               ),
             ),
@@ -244,7 +303,6 @@ class _JouerBodyState extends State<JouerBody> {
   }
 
   Future<void> addPlayer(BuildContext context) async {
-    return setState(() {
       if (temp != null) {
         player = Player(
           temp,
@@ -263,48 +321,18 @@ class _JouerBodyState extends State<JouerBody> {
         _controller.clear();
         temp = null;
       } else {
-        return showDialog<void>(
+        return showDialog(
           context: context,
-          barrierDismissible: false, // user must tap button!
           builder: (BuildContext context) {
-            return AlertDialog(
-              title: Text(
-                'Wow !!!',
-                textAlign: TextAlign.center,
-              ),
-              content: SingleChildScrollView(
-                child: ListBody(
-                  children: <Widget>[
-                    Text(
-                      'Tu n\'as pas entrez de nom !!',
-                      textAlign: TextAlign.center,
-                    ),
-                    Text(
-                      'Entre le nom d\'un joueur !!',
-                      textAlign: TextAlign.center,
-                    ),
-                  ],
-                ),
-              ),
-              actions: <Widget>[
-                TextButton(
-                  child: Text(
-                    '🍻',
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                      fontSize: 50,
-                    ),
-                  ),
-                  onPressed: () {
-                    Navigator.of(context).pop();
-                  },
-                ),
-              ],
+            return CustomDialogBox(
+              title: "👻",
+              descriptions:
+              "Tu n'as entré aucun joueur.. ",
+              text: "Bruuh",
             );
           },
         );
       }
-    });
   }
 }
 
