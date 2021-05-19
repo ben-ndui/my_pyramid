@@ -7,18 +7,18 @@ import 'package:my_pyramid/model/Players.dart';
 import 'package:my_pyramid/vues/intermediaire/inter.dart';
 
 class SmoothPyramidBody extends StatefulWidget {
-  List<Player> playersList;
-  Player currentPlayer;
+  List<Player?>? playersList;
+  Player? currentPlayer;
 
   int tour;
-  int currPlayer;
+  int? currPlayer;
 
-  GameDeck gameDeck;
-  CardDeck card;
+  GameDeck? gameDeck;
+  CardDeck? card;
 
-  bool nextScreen;
+  bool? nextScreen;
 
-  String currentCard;
+  String? currentCard;
   String nextScreenBackground;
   String firstBtnImageURL;
   String secondBtnImageURL;
@@ -26,20 +26,20 @@ class SmoothPyramidBody extends StatefulWidget {
   String nextScreenMessage;
 
   SmoothPyramidBody({
-    Key key,
-    @required this.playersList,
-    @required this.currentPlayer,
-    @required this.tour,
-    @required this.currPlayer,
-    @required this.gameDeck,
-    @required this.card,
-    @required this.nextScreen,
-    @required this.currentCard,
-    @required this.nextScreenBackground,
-    @required this.firstBtnImageURL,
-    @required this.secondBtnImageURL,
-    @required this.nextScreenName,
-    @required this.nextScreenMessage,
+    Key? key,
+    required this.playersList,
+    required this.currentPlayer,
+    required this.tour,
+    required this.currPlayer,
+    required this.gameDeck,
+    required this.card,
+    required this.nextScreen,
+    required this.currentCard,
+    required this.nextScreenBackground,
+    required this.firstBtnImageURL,
+    required this.secondBtnImageURL,
+    required this.nextScreenName,
+    required this.nextScreenMessage,
   });
 
   @override
@@ -61,89 +61,89 @@ class SmoothPyramidBody extends StatefulWidget {
 }
 
 class _SmoothPyramidBodyState extends State<SmoothPyramidBody> {
-  PlayController playController;
+  PlayController? playController;
 
-  List<Player> playersList;
-  Player currentPlayer;
-  bool playerAnswer;
+  List<Player?>? playersList;
+  Player? currentPlayer;
+  bool? playerAnswer;
 
   int currPlayer = 0;
-  int tour;
-  int nbPhase;
+  int? tour;
+  int? nbPhase;
 
-  bool nextScreen;
-  bool isWinOrNot;
+  bool? nextScreen;
+  bool? isWinOrNot;
 
-  GameDeck gameDeck;
-  CardDeck card;
+  GameDeck? gameDeck;
+  CardDeck? card;
 
-  String currentCard;
-  String nextScreenBackground;
-  String firstBtnImageURL;
-  String secondBtnImageURL;
-  String nextScreenName;
-  String nextScreenMessage;
+  String? currentCard;
+  String? nextScreenBackground;
+  late String firstBtnImageURL;
+  String? secondBtnImageURL;
+  String? nextScreenName;
+  String? nextScreenMessage;
 
   //ici les url des cartes a changer
-  Image url1 = Image.asset(
+  Image? url1 = Image.asset(
     "assets/backgrounds/components/cardBackBlack.png",
     width: 200.0,
     fit: BoxFit.contain,
   );
-  Image url2 = Image.asset(
+  Image? url2 = Image.asset(
     "assets/backgrounds/components/cardBackBlack.png",
     width: 200.0,
     fit: BoxFit.contain,
   );
-  Image url3 = Image.asset(
+  Image? url3 = Image.asset(
     "assets/backgrounds/components/cardBackBlack.png",
     width: 200.0,
     fit: BoxFit.contain,
   );
-  Image url4 = Image.asset(
+  Image? url4 = Image.asset(
     "assets/backgrounds/components/cardBackBlack.png",
     width: 200.0,
     fit: BoxFit.contain,
   );
-  Image url5 = Image.asset(
+  Image? url5 = Image.asset(
     "assets/backgrounds/components/cardBackBlack.png",
     width: 200.0,
     fit: BoxFit.contain,
   );
-  Image url6 = Image.asset(
+  Image? url6 = Image.asset(
     "assets/backgrounds/components/cardBackBlack.png",
     width: 200.0,
     fit: BoxFit.contain,
   );
-  Image url7 = Image.asset(
+  Image? url7 = Image.asset(
     "assets/backgrounds/components/cardBackBlack.png",
     width: 200.0,
     fit: BoxFit.contain,
   );
-  Image url8 = Image.asset(
+  Image? url8 = Image.asset(
     "assets/backgrounds/components/cardBackBlack.png",
     width: 200.0,
     fit: BoxFit.contain,
   );
-  Image url9 = Image.asset(
+  Image? url9 = Image.asset(
     "assets/backgrounds/components/cardBackBlack.png",
     width: 200.0,
     fit: BoxFit.contain,
   );
-  Image url10 = Image.asset(
+  Image? url10 = Image.asset(
     "assets/backgrounds/components/cardBackBlack.png",
     width: 200.0,
     fit: BoxFit.contain,
   );
 
   _SmoothPyramidBodyState(
-    List<Player> playersList,
-    Player currentPlayer,
+    List<Player?>? playersList,
+    Player? currentPlayer,
     int tour,
-    GameDeck gameDeck,
-    CardDeck card,
-    String currentCard,
-    bool nextScreen,
+    GameDeck? gameDeck,
+    CardDeck? card,
+    String? currentCard,
+    bool? nextScreen,
     String nextScreenBackground,
     String firstBtnImageURL,
     String secondBtnImageURL,
@@ -177,20 +177,18 @@ class _SmoothPyramidBodyState extends State<SmoothPyramidBody> {
   @override
   void initState() {
     super.initState();
-    if (this.currPlayer >= this.playersList.length) {
+    if (this.currPlayer >= this.playersList!.length) {
       this.currPlayer = 0;
     }
-    this.card = this.playersList[this.currPlayer].getRandCard();
+    this.card = this.playersList![this.currPlayer]!.getRandCard();
   }
 
   @override
   Widget build(BuildContext context) {
 
-    var size = MediaQuery.of(context).size;
-
     return WillPopScope(
       onWillPop: () {
-        return showDialog(
+        showDialog(
           context: context,
           builder: (context) => AlertDialog(
             title: Text(
@@ -208,8 +206,8 @@ class _SmoothPyramidBodyState extends State<SmoothPyramidBody> {
               ),
             ],
           ),
-        );
-      },
+        ) as Future<bool>;
+      } as Future<bool> Function()?,
       child: Container(
         padding: EdgeInsets.only(
           top: MediaQuery.of(context).size.width / 5,
@@ -245,12 +243,12 @@ class _SmoothPyramidBodyState extends State<SmoothPyramidBody> {
                     onTap: () {
                       setState(() {
                         this.card =
-                            this.playersList[this.currPlayer].getRandCard();
-                        this.url1 = this.card.img;
+                            this.playersList![this.currPlayer]!.getRandCard();
+                        this.url1 = this.card!.img;
                         this
-                            .playersList[currPlayer]
+                            .playersList![currPlayer]!
                             .playController
-                            .questionTime(this.card, context);
+                            .questionTime(this.card!, context);
                       });
                     },
                     child: Center(
@@ -271,12 +269,12 @@ class _SmoothPyramidBodyState extends State<SmoothPyramidBody> {
                   onTap: () {
                     setState(() {
                       this.card =
-                          this.playersList[this.currPlayer].getRandCard();
-                      this.url2 = this.card.img;
+                          this.playersList![this.currPlayer]!.getRandCard();
+                      this.url2 = this.card!.img;
                       this
-                          .playersList[currPlayer]
+                          .playersList![currPlayer]!
                           .playController
-                          .questionTime(this.card, context);
+                          .questionTime(this.card!, context);
                     });
                   },
                   child: Container(
@@ -289,12 +287,12 @@ class _SmoothPyramidBodyState extends State<SmoothPyramidBody> {
                   onTap: () {
                     setState(() {
                       this.card =
-                          this.playersList[this.currPlayer].getRandCard();
-                      this.url3 = this.card.img;
+                          this.playersList![this.currPlayer]!.getRandCard();
+                      this.url3 = this.card!.img;
                       this
-                          .playersList[currPlayer]
+                          .playersList![currPlayer]!
                           .playController
-                          .questionTime(this.card, context);
+                          .questionTime(this.card!, context);
                     });
                   },
                   child: Container(
@@ -315,12 +313,12 @@ class _SmoothPyramidBodyState extends State<SmoothPyramidBody> {
                   onTap: () {
                     setState(() {
                       this.card =
-                          this.playersList[this.currPlayer].getRandCard();
-                      this.url4 = this.card.img;
+                          this.playersList![this.currPlayer]!.getRandCard();
+                      this.url4 = this.card!.img;
                       this
-                          .playersList[currPlayer]
+                          .playersList![currPlayer]!
                           .playController
-                          .questionTime(this.card, context);
+                          .questionTime(this.card!, context);
                     });
                   },
                   child: Container(
@@ -333,12 +331,12 @@ class _SmoothPyramidBodyState extends State<SmoothPyramidBody> {
                   onTap: () {
                     setState(() {
                       this.card =
-                          this.playersList[this.currPlayer].getRandCard();
-                      this.url5 = this.card.img;
+                          this.playersList![this.currPlayer]!.getRandCard();
+                      this.url5 = this.card!.img;
                       this
-                          .playersList[currPlayer]
+                          .playersList![currPlayer]!
                           .playController
-                          .questionTime(this.card, context);
+                          .questionTime(this.card!, context);
                     });
                   },
                   child: Container(
@@ -350,12 +348,12 @@ class _SmoothPyramidBodyState extends State<SmoothPyramidBody> {
                   onTap: () {
                     setState(() {
                       this.card =
-                          this.playersList[this.currPlayer].getRandCard();
-                      this.url6 = this.card.img;
+                          this.playersList![this.currPlayer]!.getRandCard();
+                      this.url6 = this.card!.img;
                       this
-                          .playersList[currPlayer]
+                          .playersList![currPlayer]!
                           .playController
-                          .questionTime(this.card, context);
+                          .questionTime(this.card!, context);
                     });
                   },
                   child: Container(
@@ -376,12 +374,12 @@ class _SmoothPyramidBodyState extends State<SmoothPyramidBody> {
                   onTap: () {
                     setState(() {
                       this.card =
-                          this.playersList[this.currPlayer].getRandCard();
-                      this.url7 = this.card.img;
+                          this.playersList![this.currPlayer]!.getRandCard();
+                      this.url7 = this.card!.img;
                       this
-                          .playersList[currPlayer]
+                          .playersList![currPlayer]!
                           .playController
-                          .questionTime(this.card, context);
+                          .questionTime(this.card!, context);
                     });
                   },
                   child: Container(
@@ -394,12 +392,12 @@ class _SmoothPyramidBodyState extends State<SmoothPyramidBody> {
                   onTap: () {
                     setState(() {
                       this.card =
-                          this.playersList[this.currPlayer].getRandCard();
-                      this.url8 = this.card.img;
+                          this.playersList![this.currPlayer]!.getRandCard();
+                      this.url8 = this.card!.img;
                       this
-                          .playersList[currPlayer]
+                          .playersList![currPlayer]!
                           .playController
-                          .questionTime(this.card, context);
+                          .questionTime(this.card!, context);
                     });
                   },
                   child: Container(
@@ -412,12 +410,12 @@ class _SmoothPyramidBodyState extends State<SmoothPyramidBody> {
                   onTap: () {
                     setState(() {
                       this.card =
-                          this.playersList[this.currPlayer].getRandCard();
-                      this.url9 = this.card.img;
+                          this.playersList![this.currPlayer]!.getRandCard();
+                      this.url9 = this.card!.img;
                       this
-                          .playersList[currPlayer]
+                          .playersList![currPlayer]!
                           .playController
-                          .questionTime(this.card, context);
+                          .questionTime(this.card!, context);
                     });
                   },
                   child: Container(
@@ -430,12 +428,12 @@ class _SmoothPyramidBodyState extends State<SmoothPyramidBody> {
                   onTap: () {
                     setState(() {
                       this.card =
-                          this.playersList[this.currPlayer].getRandCard();
-                      this.url10 = this.card.img;
+                          this.playersList![this.currPlayer]!.getRandCard();
+                      this.url10 = this.card!.img;
                       this
-                          .playersList[currPlayer]
+                          .playersList![currPlayer]!
                           .playController
-                          .questionTime(this.card, context);
+                          .questionTime(this.card!, context);
                     });
                   },
                   child: Container(
@@ -471,7 +469,7 @@ class _SmoothPyramidBodyState extends State<SmoothPyramidBody> {
               // color: Colors.yellow,
               onPressed: () {
                 setState(() {
-                  this.playerAnswer = this.playersList[this.currPlayer].play(
+                  this.playerAnswer = this.playersList![this.currPlayer]!.play(
                         color,
                         this.tour,
                         this.card,
@@ -480,13 +478,13 @@ class _SmoothPyramidBodyState extends State<SmoothPyramidBody> {
                         this.nextScreenMessage,
                         this.currPlayer,
                       );
-                  this.gameDeck.gameDeck.remove(card);
+                  this.gameDeck!.gameDeck.remove(card);
                   this.currPlayer += 1;
-                  if (this.currPlayer == this.playersList.length) {
+                  if (this.currPlayer == this.playersList!.length) {
                     this.currPlayer = 0;
                   }
-                  this.currentPlayer = this.playersList[this.currPlayer];
-                  this.card = this.currentPlayer.getRandCard();
+                  this.currentPlayer = this.playersList![this.currPlayer];
+                  this.card = this.currentPlayer!.getRandCard();
                 });
               },
               child: Image.asset(

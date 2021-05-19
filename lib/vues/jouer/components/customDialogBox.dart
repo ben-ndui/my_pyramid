@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
 class CustomDialogBox extends StatefulWidget {
-  final String title, descriptions, text;
-  final Image img;
+  final String? title, descriptions, text;
+  final Image? img;
 
   const CustomDialogBox(
-      {Key key, this.title, this.descriptions, this.text, this.img})
+      {Key? key, this.title, this.descriptions, this.text, this.img})
       : super(key: key);
 
   @override
@@ -47,14 +47,14 @@ class _CustomDialogBoxState extends State<CustomDialogBox> {
             mainAxisSize: MainAxisSize.min,
             children: <Widget>[
               Text(
-                widget.title,
+                widget.title!,
                 style: TextStyle(fontSize: 30, fontWeight: FontWeight.w600),
               ),
               SizedBox(
                 height: 15,
               ),
               Text(
-                widget.descriptions,
+                widget.descriptions!,
                 style: TextStyle(fontSize: 25),
                 textAlign: TextAlign.center,
               ),
@@ -67,7 +67,7 @@ class _CustomDialogBoxState extends State<CustomDialogBox> {
                     onPressed: () {
                       Navigator.of(context).pop();
                     },
-                    style: ButtonStyle(backgroundColor: MaterialStateProperty.resolveWith<Color>(
+                    style: ButtonStyle(backgroundColor: MaterialStateProperty.resolveWith<Color?>(
                           (Set<MaterialState> states) {
                         if (states.contains(MaterialState.pressed))
                           return Colors.white30;
@@ -75,7 +75,7 @@ class _CustomDialogBoxState extends State<CustomDialogBox> {
                       },
                     ),),
                     child: Text(
-                      widget.text,
+                      widget.text!,
                       style: TextStyle(fontSize: 50, color: Colors.grey.withOpacity(0.5)),
                     )),
               ),

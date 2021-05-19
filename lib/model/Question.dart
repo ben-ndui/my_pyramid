@@ -1,7 +1,7 @@
 class Question {
-  int id;
-  String title;
-  String description;
+  int? id;
+  String? title;
+  String? description;
 
   Question({
     this.id,

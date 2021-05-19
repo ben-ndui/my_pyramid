@@ -2,16 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:my_pyramid/model/CardDeck.dart';
 
 class DisplayCardEarned extends StatelessWidget {
-  final CardDeck card;
+  final CardDeck? card;
   final String text;
   const DisplayCardEarned({
-    Key key,
-    @required this.tour,
-    @required this.card,
-    @required this.text,
+    Key? key,
+    required this.tour,
+    required this.card,
+    required this.text,
   }) : super(key: key);
 
-  final int tour;
+  final int? tour;
 
   @override
   Widget build(BuildContext context) {
@@ -34,7 +34,7 @@ class DisplayCardEarned extends StatelessWidget {
                 ),
                 child: Stack(
                   children: [
-                    Center(child: card.img),
+                    Center(child: card!.img),
                     Center(
                       child: Container(
                         height: MediaQuery.of(context).size.width / 2,

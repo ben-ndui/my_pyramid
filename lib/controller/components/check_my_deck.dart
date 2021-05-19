@@ -4,13 +4,13 @@ import 'package:my_pyramid/model/Players.dart';
 import 'package:my_pyramid/model/constants.dart';
 
 class CheckMyDeck extends StatelessWidget {
-  final List<Player> playersList;
-  final int currPlayer;
+  final List<Player?>? playersList;
+  final int? currPlayer;
 
   const CheckMyDeck({
-    Key key,
-    @required this.playersList,
-    @required this.currPlayer,
+    Key? key,
+    required this.playersList,
+    required this.currPlayer,
   }) : super(key: key);
 
   @override
@@ -21,7 +21,7 @@ class CheckMyDeck extends StatelessWidget {
       margin: EdgeInsets.only(bottom: size.width / 18),
       child: FloatingActionButton.extended(
         onPressed: () {
-          return showDialog<void>(
+          showDialog<void>(
             context: context,
             barrierDismissible: false, // user must tap button!
             builder: (BuildContext context) {
@@ -33,7 +33,7 @@ class CheckMyDeck extends StatelessWidget {
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(30),
                   ),
-                  child: this.playersList.length > 0 ? CustomScrollView(
+                  child: this.playersList!.length > 0 ? CustomScrollView(
                     shrinkWrap: true,
                     slivers: <Widget>[
                       SliverPadding(
@@ -41,15 +41,15 @@ class CheckMyDeck extends StatelessWidget {
                         sliver: SliverList(
                           delegate: SliverChildListDelegate(
                             List.generate(
-                              this.playersList.length,
+                              this.playersList!.length,
                               (index) {
                                 return ListTile(
                                   leading: Icon(Icons.account_circle_outlined, color: Colors.black, size: 60,),
                                   title: Padding(
                                     padding: const EdgeInsets.all(8.0),
-                                    child: Text('Cartes de ' + this.playersList[index].name, style: TextStyle(fontSize: 30),),
+                                    child: Text('Cartes de ' + this.playersList![index]!.name!, style: TextStyle(fontSize: 30),),
                                   ),
-                                  subtitle: this.playersList[index].deck.length > 0 ? Container(
+                                  subtitle: this.playersList![index]!.deck.length > 0 ? Container(
                                     width: size.width,
                                     height: 120,
                                     child: liarMode == true ? GridView.count(
@@ -57,9 +57,9 @@ class CheckMyDeck extends StatelessWidget {
                                       crossAxisSpacing: 10.0,
                                       crossAxisCount: 4,
                                       scrollDirection: Axis.vertical,
-                                      children: List.generate(this.playersList[index].deck.length, (cardIndex){
-                                        if(this.playersList[index].name == this.playersList[this.currPlayer].name){
-                                          return Container(child: this.playersList[this.currPlayer].deck[cardIndex].img, width: 200, height: 300,);
+                                      children: List.generate(this.playersList![index]!.deck.length, (cardIndex){
+                                        if(this.playersList![index]!.name == this.playersList![this.currPlayer!]!.name){
+                                          return Container(child: this.playersList![this.currPlayer!]!.deck[cardIndex]!.img, width: 200, height: 300,);
                                         }else{
                                           return Image.asset('assets/backgrounds/components/cardBackBlack.png', fit: BoxFit.cover, width: size.width, height: size.height,);
                                         }
@@ -67,8 +67,8 @@ class CheckMyDeck extends StatelessWidget {
                                     ) : GridView.count(
                                       crossAxisCount: 4,
                                       scrollDirection: Axis.vertical,
-                                      children: List.generate(this.playersList[index].deck.length, (cardIndex){
-                                          return Center(child: Container(child: this.playersList[index].deck[cardIndex].img, width: this.playersList[index].deck[cardIndex].img.width, height: this.playersList[index].deck[cardIndex].img.height,));
+                                      children: List.generate(this.playersList![index]!.deck.length, (cardIndex){
+                                          return Center(child: Container(child: this.playersList![index]!.deck[cardIndex]!.img, width: this.playersList![index]!.deck[cardIndex]!.img!.width, height: this.playersList![index]!.deck[cardIndex]!.img!.height,));
                                       }),
                                     ),
                                   ) : Center(child: CircularProgressIndicator(),),

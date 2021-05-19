@@ -12,7 +12,7 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-  var currentPage = images.length - 1.0;
+  double? currentPage = images.length - 1.0;
 
   double xOffset = 0;
   double yOffset = 0;
@@ -20,7 +20,7 @@ class _HomeState extends State<Home> {
 
   bool isActive = false;
 
-  PageController controller;
+  PageController? controller;
 
   @override
   Widget build(BuildContext context) {
@@ -100,7 +100,7 @@ class _HomeState extends State<Home> {
                               scaleFactor = 0.9;
                             });
                             isActive = true;
-                            return CustomDialogBox(title: 'Config', text: 'Manage your game',);
+                            CustomDialogBox(title: 'Config', text: 'Manage your game',);
                           } else {
                             setState(() {
                               xOffset = 0;

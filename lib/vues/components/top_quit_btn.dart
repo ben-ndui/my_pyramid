@@ -3,7 +3,7 @@ import 'package:my_pyramid/vues/intermediaire/inter.dart';
 
 class TopQuitButton extends StatelessWidget {
   const TopQuitButton({
-    Key key,
+    Key? key,
   }) : super(key: key);
 
   @override
@@ -14,7 +14,7 @@ class TopQuitButton extends StatelessWidget {
       margin: EdgeInsets.only(
         top: 50.0,
       ),
-      child: FlatButton(
+      child: TextButton(
         onPressed: () {
           Navigator.of(context).push(
             MaterialPageRoute(

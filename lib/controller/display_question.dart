@@ -4,16 +4,16 @@ import 'package:my_pyramid/model/Players.dart';
 
 class DisplayQuestion extends StatelessWidget {
   final CardDeck card;
-  final String text;
-  final String description;
-  final Player randomPlayer;
+  final String? text;
+  final String? description;
+  final Player? randomPlayer;
 
   const DisplayQuestion({
-    Key key,
-    @required this.card,
-    @required this.text,
-    @required this.description,
-    @required this.randomPlayer,
+    Key? key,
+    required this.card,
+    required this.text,
+    required this.description,
+    required this.randomPlayer,
   }) : super(key: key);
 
   @override
@@ -50,9 +50,9 @@ class DisplayQuestion extends StatelessWidget {
                           child: Column(
                             children: [
                               Text(
-                                    '🏌🏻‍♂️'+text +'🏌🏻‍♂️'
+                                    '🏌🏻‍♂️'+text! +'🏌🏻‍♂️'
                                     "\n\n" +
-                                        "${randomPlayer.name} " +
+                                        "${randomPlayer!.name} " +
                                         "\n" +
                                     " " ,
                                 textAlign: TextAlign.center,
@@ -65,7 +65,7 @@ class DisplayQuestion extends StatelessWidget {
                               ),
                               SizedBox(height: 10,),
                               Text(
-                                description,
+                                description!,
                                 textAlign: TextAlign.justify,
                                 style: TextStyle(
                                     color: Colors.black,

@@ -4,11 +4,11 @@ import 'data.dart';
 
 class CardGenerator extends StatefulWidget {
   const CardGenerator({
-    Key key,
+    Key? key,
     this.controller,
   }) : super(key: key);
 
-  final PageController controller;
+  final PageController? controller;
 
   @override
   _CardGeneratorState createState() => _CardGeneratorState();

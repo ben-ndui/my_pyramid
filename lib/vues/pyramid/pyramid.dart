@@ -8,38 +8,38 @@ import 'package:my_pyramid/vues/components/background.dart';
 import 'components/pyramid_body.dart';
 
 class SmoothPyramid extends StatefulWidget {
-  final List<Player> playersList;
-  final Player currentPlayer;
+  final List<Player?>? playersList;
+  final Player? currentPlayer;
 
   final int tour;
-  final int currPlayer;
+  final int? currPlayer;
 
-  final CardDeck card;
-  final bool nextScreen;
-  final String currentCard;
+  final CardDeck? card;
+  final bool? nextScreen;
+  final String? currentCard;
   final String nextScreenBackground;
   final String firstBtnImageURL;
   final String secondBtnImageURL;
   final String nextScreenName;
   final String nextScreenMessage;
 
-  final GameDeck gameDeck;
+  final GameDeck? gameDeck;
 
   const SmoothPyramid({
-    Key key,
-    @required this.playersList,
+    Key? key,
+    required this.playersList,
     this.currentPlayer,
-    @required this.tour,
-    @required this.currPlayer,
+    required this.tour,
+    required this.currPlayer,
     this.card,
-    @required this.nextScreen,
+    required this.nextScreen,
     this.currentCard,
-    @required this.nextScreenBackground,
-    @required this.firstBtnImageURL,
-    @required this.secondBtnImageURL,
-    @required this.nextScreenName,
-    @required this.nextScreenMessage,
-    @required this.gameDeck,
+    required this.nextScreenBackground,
+    required this.firstBtnImageURL,
+    required this.secondBtnImageURL,
+    required this.nextScreenName,
+    required this.nextScreenMessage,
+    required this.gameDeck,
   }) : super(key: key);
 
   @override
@@ -61,38 +61,38 @@ class SmoothPyramid extends StatefulWidget {
 }
 
 class _SmoothPyramidState extends State<SmoothPyramid> {
-  List<Player> playersList = [];
-  Player currentPlayer;
+  List<Player?>? playersList = [];
+  Player? currentPlayer;
 
   int tour = 1;
-  int currPlayer = 0;
-  bool nextScreen = false;
+  int? currPlayer = 0;
+  bool? nextScreen = false;
 
-  String currentCard = "";
+  String? currentCard = "";
   String nextScreenBackground = "";
   String firstBtnImageURL = "";
   String secondBtnImageURL = "";
   String nextScreenName = "";
   String nextScreenMessage = "";
 
-  CardDeck card = CardDeck();
-  GameDeck gameDeck = GameDeck();
-  PlayController playController;
+  CardDeck? card = CardDeck();
+  GameDeck? gameDeck = GameDeck();
+  PlayController? playController;
 
   _SmoothPyramidState(
-    List<Player> playersList,
-    Player currentPlayer,
+    List<Player?>? playersList,
+    Player? currentPlayer,
     int tour,
-    CardDeck card,
-    bool nextScreen,
-    String currentCard,
+    CardDeck? card,
+    bool? nextScreen,
+    String? currentCard,
     String nextScreenBackground,
     String firstBtnImageURL,
     String secondBtnImageURL,
     String nextScreenName,
     String nextScreenMessage,
-    GameDeck gameDeck,
-    int currPlayer,
+    GameDeck? gameDeck,
+    int? currPlayer,
   ) {
     this.playersList = playersList;
     this.currentPlayer = currentPlayer;

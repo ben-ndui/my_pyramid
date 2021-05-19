@@ -8,39 +8,39 @@ import '../PlayGameMethod.dart';
 import 'check_my_deck.dart';
 
 class SymboleBody extends StatefulWidget {
-  List<Player> playersList;
-  Player currentPlayer;
+  List<Player?>? playersList;
+  Player? currentPlayer;
 
-  int tour;
-  int currPlayer;
+  int? tour;
+  int? currPlayer;
 
-  GameDeck gameDeck;
-  CardDeck card;
+  GameDeck? gameDeck;
+  CardDeck? card;
 
-  bool nextScreen;
+  bool? nextScreen;
 
-  String currentCard;
-  String nextScreenBackground;
-  String firstBtnImageURL;
-  String secondBtnImageURL;
-  String nextScreenName;
-  String nextScreenMessage;
+  String? currentCard;
+  String? nextScreenBackground;
+  String? firstBtnImageURL;
+  String? secondBtnImageURL;
+  String? nextScreenName;
+  String? nextScreenMessage;
 
   SymboleBody({
-    Key key,
-    @required this.playersList,
-    @required this.currentPlayer,
-    @required this.tour,
-    @required this.currPlayer,
-    @required this.gameDeck,
-    @required this.card,
-    @required this.nextScreen,
-    @required this.currentCard,
-    @required this.nextScreenBackground,
-    @required this.firstBtnImageURL,
-    @required this.secondBtnImageURL,
-    @required this.nextScreenName,
-    @required this.nextScreenMessage,
+    Key? key,
+    required this.playersList,
+    required this.currentPlayer,
+    required this.tour,
+    required this.currPlayer,
+    required this.gameDeck,
+    required this.card,
+    required this.nextScreen,
+    required this.currentCard,
+    required this.nextScreenBackground,
+    required this.firstBtnImageURL,
+    required this.secondBtnImageURL,
+    required this.nextScreenName,
+    required this.nextScreenMessage,
   });
 
   @override
@@ -63,43 +63,43 @@ class SymboleBody extends StatefulWidget {
 }
 
 class _SymboleBodyState extends State<SymboleBody> {
-  PlayController playController;
+  late PlayController playController;
 
-  List<Player> playersList;
-  Player currentPlayer;
-  bool playerAnswer;
+  List<Player?>? playersList;
+  Player? currentPlayer;
+  bool? playerAnswer;
 
-  int currPlayer;
-  int tour;
-  int nbPhase;
+  int? currPlayer;
+  int? tour;
+  int? nbPhase;
 
-  bool nextScreen;
-  bool isWinOrNot;
+  bool? nextScreen;
+  bool? isWinOrNot;
 
-  GameDeck gameDeck;
-  CardDeck card;
+  GameDeck? gameDeck;
+  CardDeck? card;
 
-  String currentCard;
-  String nextScreenBackground;
-  String firstBtnImageURL;
-  String secondBtnImageURL;
-  String nextScreenName;
-  String nextScreenMessage;
+  String? currentCard;
+  String? nextScreenBackground;
+  String? firstBtnImageURL;
+  String? secondBtnImageURL;
+  String? nextScreenName;
+  String? nextScreenMessage;
 
   _SymboleBodyState(
-    List<Player> playersList,
-    Player currentPlayer,
-    int tour,
-    GameDeck gameDeck,
-    CardDeck card,
-    String currentCard,
-    bool nextScreen,
-    String nextScreenBackground,
-    String firstBtnImageURL,
-    String secondBtnImageURL,
-    String nextScreenName,
-    String nextScreenMessage,
-    int currPlayer,
+    List<Player?>? playersList,
+    Player? currentPlayer,
+    int? tour,
+    GameDeck? gameDeck,
+    CardDeck? card,
+    String? currentCard,
+    bool? nextScreen,
+    String? nextScreenBackground,
+    String? firstBtnImageURL,
+    String? secondBtnImageURL,
+    String? nextScreenName,
+    String? nextScreenMessage,
+    int? currPlayer,
   ) {
     this.playersList = playersList;
     this.currentPlayer = currentPlayer;
@@ -128,71 +128,48 @@ class _SymboleBodyState extends State<SymboleBody> {
   @override
   void initState() {
     super.initState();
-    if (this.currPlayer >= this.playersList.length) {
+    if (this.currPlayer! >= this.playersList!.length) {
       this.currPlayer = 0;
     }
-    this.card = this.playersList[0].getRandCard();
+    this.card = this.playersList![0]!.getRandCard();
   }
 
   @override
   Widget build(BuildContext context) {
-    return WillPopScope(
-      onWillPop: () {
-        return showDialog(
-          context: context,
-          builder: (context) => AlertDialog(
-            title: Text(
-              "Tour ${this.tour}",
-            ),
-            content: Text(
-              "On ne peut plus retourner en arrière a partir de maintenant !",
-            ),
-            actions: [
-              TextButton(
-                onPressed: () {
-                  Navigator.of(context).pop();
-                },
-                child: Text("🍺"),
+    return Container(
+      child: Column(
+        children: [
+          TopQuitButton(),
+          displayCard(context,
+              Image.asset("assets/backgrounds/components/cardBack.png")),
+          Center(
+            child: Text(
+              "${this.playersList![this.currPlayer!]!.name}",
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: 25,
+                fontWeight: FontWeight.w200,
               ),
-            ],
+            ),
           ),
-        );
-      },
-      child: Container(
-        child: Column(
-          children: [
-            TopQuitButton(),
-            displayCard(context,
-                Image.asset("assets/backgrounds/components/cardBack.png")),
-            Center(
-              child: Text(
-                "${this.playersList[this.currPlayer].name}",
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 25,
-                  fontWeight: FontWeight.w200,
-                ),
-              ),
-            ),
-            answerButton(
-              "pique",
-              "trefle",
-              "assets/backgrounds/components/piqueButton.png",
-              "assets/backgrounds/components/treffleButton.png",
-            ),
-            answerButton(
-              "coeur",
-              "carreau",
-              "assets/backgrounds/components/coeurButton.png",
-              "assets/backgrounds/components/carreauButton.png",
-            ),
-            CheckMyDeck(
-              playersList: this.playersList,
-              currPlayer: this.currPlayer,
-            )
-          ],
-        ),
+          answerButton(
+            "pique",
+            "trefle",
+            "assets/backgrounds/components/piqueButton.png",
+            "assets/backgrounds/components/treffleButton.png",
+          ),
+          answerButton(
+            "coeur",
+            "carreau",
+            "assets/backgrounds/components/coeurButton.png",
+            "assets/backgrounds/components/carreauButton.png",
+          ),
+          CheckMyDeck(
+            playersList: this.playersList,
+            currPlayer: this.currPlayer,
+          )
+        ],
       ),
     );
   }
@@ -208,7 +185,7 @@ class _SymboleBodyState extends State<SymboleBody> {
             TextButton(
               onPressed: () {
                 setState(() {
-                  this.playerAnswer = this.playersList[this.currPlayer].play(
+                  this.playerAnswer = this.playersList![this.currPlayer!]!.play(
                         color,
                         this.tour,
                         this.card,
@@ -217,7 +194,7 @@ class _SymboleBodyState extends State<SymboleBody> {
                         this.nextScreenMessage,
                         this.currPlayer,
                       );
-                  this.gameDeck.gameDeck.remove(card);
+                  this.gameDeck!.gameDeck.remove(card);
                   this.playController.isWinOrNot(
                         card,
                         "Yes Brothaaa \n Tu as gagné, distribue $tour a qui tu veux !!",
@@ -229,13 +206,15 @@ class _SymboleBodyState extends State<SymboleBody> {
                         playerAnswer,
                         currPlayer,
                       );
-                  this.currPlayer++;
+                  if(currPlayer != null){
+                    currPlayer = currPlayer! + 1;
+                  }
                   this.playController.setCurrPlayer(this.currPlayer);
-                  if (this.currPlayer >= this.playersList.length - 1) {
+                  if (this.currPlayer! >= this.playersList!.length - 1) {
                     this.currPlayer = 0;
                   }
-                  this.currentPlayer = this.playersList[this.currPlayer];
-                  this.card = this.currentPlayer.getRandCard();
+                  this.currentPlayer = this.playersList![this.currPlayer!];
+                  this.card = this.currentPlayer!.getRandCard();
                 });
               },
               child: Image.asset(
@@ -246,7 +225,7 @@ class _SymboleBodyState extends State<SymboleBody> {
             TextButton(
               onPressed: () {
                 setState(() {
-                  this.playerAnswer = this.playersList[this.currPlayer].play(
+                  this.playerAnswer = this.playersList![this.currPlayer!]!.play(
                         color2,
                         this.tour,
                         this.card,
@@ -255,7 +234,7 @@ class _SymboleBodyState extends State<SymboleBody> {
                         this.nextScreenMessage,
                         this.currPlayer,
                       );
-                  this.gameDeck.gameDeck.remove(card);
+                  this.gameDeck!.gameDeck.remove(card);
                   this.playController.isWinOrNot(
                         card,
                         "Oui !!! \n C'est gagné, distribue $tour a qui tu veux !!",
@@ -267,13 +246,15 @@ class _SymboleBodyState extends State<SymboleBody> {
                         playerAnswer,
                         currPlayer,
                       );
-                  this.currPlayer++;
+                  if(currPlayer != null){
+                    currPlayer = currPlayer! + 1;
+                  }
                   this.playController.setCurrPlayer(this.currPlayer);
-                  if (this.currPlayer >= this.playersList.length - 1) {
+                  if (this.currPlayer! >= this.playersList!.length - 1) {
                     this.currPlayer = 0;
                   }
-                  this.currentPlayer = this.playersList[this.currPlayer];
-                  this.card = this.currentPlayer.getRandCard();
+                  this.currentPlayer = this.playersList![this.currPlayer!];
+                  this.card = this.currentPlayer!.getRandCard();
                 });
               },
               child: Image.asset(

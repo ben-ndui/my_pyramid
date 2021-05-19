@@ -14,22 +14,22 @@ import 'display_question.dart';
 import 'game.dart';
 
 class PlayController {
-  List<Player> playersList;
-  Player currentPlayer;
-  int currPlayer;
-  GameDeck gameDeck;
-  CardDeck card;
-  String currentCard;
-  bool nextScreen;
+  List<Player?>? playersList;
+  Player? currentPlayer;
+  int? currPlayer;
+  GameDeck? gameDeck;
+  CardDeck? card;
+  String? currentCard;
+  bool? nextScreen;
 
   PlayController(
-    List<Player> playersList,
-    Player currentPlayer,
-    GameDeck gameDeck,
-    CardDeck card,
-    String currentCard,
-    bool nextScreen,
-    int currPlayer,
+    List<Player?>? playersList,
+    Player? currentPlayer,
+    GameDeck? gameDeck,
+    CardDeck? card,
+    String? currentCard,
+    bool? nextScreen,
+    int? currPlayer,
   ) {
     this.playersList = playersList;
     this.currentPlayer = currentPlayer;
@@ -62,7 +62,7 @@ class PlayController {
   /**
    * chaque variable doit etre de type widget.varible
    */
-  void setCurrPlayer(int nb) {
+  void setCurrPlayer(int? nb) {
     this.currPlayer = nb;
   }
 
@@ -74,10 +74,10 @@ class PlayController {
     return randomQuestion;
   }
 
-  Player getRandomPlayer() {
+  Player? getRandomPlayer() {
     Random random = Random();
-    Player randomPlayer =
-        this.playersList[random.nextInt(this.playersList.length)];
+    Player? randomPlayer =
+        this.playersList![random.nextInt(this.playersList!.length)];
     return randomPlayer;
   }
 
@@ -85,7 +85,7 @@ class PlayController {
     return playersList[next];
   }
 
-  dynamic setupNextScreen(String name, int currPlayer) {
+  dynamic setupNextScreen(String? name, int currPlayer) {
     print("RedirectionSetuppNextScreen");
     switch (name) {
       case "PlusOuMoinsScreen":
@@ -101,7 +101,6 @@ class PlayController {
           gameDeck: this.gameDeck,
           currPlayer: currPlayer,
         );
-        break;
       case "InOutScreen":
         return GameScreen(
           playersList: this.playersList,
@@ -115,7 +114,6 @@ class PlayController {
           gameDeck: this.gameDeck,
           currPlayer: this.currPlayer,
         );
-        break;
       case "CardSymboleScreen":
         return SymboleScreen(
           playersList: this.playersList,
@@ -129,7 +127,6 @@ class PlayController {
           gameDeck: this.gameDeck,
           currPlayer: this.currPlayer,
         );
-        break;
       case "SmoothPyramid":
         return SmoothPyramid(
           playersList: this.playersList,
@@ -143,21 +140,20 @@ class PlayController {
           gameDeck: this.gameDeck,
           currPlayer: this.currPlayer,
         );
-        break;
       default:
     }
   }
 
   Future<void> isWinOrNot(
-    CardDeck card,
+    CardDeck? card,
     String text,
     String textFalse,
-    String interfaceMessage,
+    String? interfaceMessage,
     BuildContext context,
-    String nextScreenName,
-    int tour,
-    bool answer,
-    int currPlayer,
+    String? nextScreenName,
+    int? tour,
+    bool? answer,
+    int? currPlayer,
   ) {
     if (answer == true) {
       return myDialog(
@@ -183,8 +179,8 @@ class PlayController {
   }
 
   Future<void> questionTime(CardDeck card, BuildContext context) {
-    Player randomPlayer =
-        this.playersList[this.currPlayer].playController.getRandomPlayer();
+    Player? randomPlayer =
+        this.playersList![this.currPlayer!]!.playController.getRandomPlayer();
     switch (card.number) {
       case 12:
         return showGeneralDialog(
@@ -197,12 +193,12 @@ class PlayController {
             return DisplayQuestion(
               card: card,
               text: this
-                  .playersList[this.currPlayer]
+                  .playersList![this.currPlayer!]!
                   .playController
                   .getRandQuestion()
                   .title,
               description: this
-                  .playersList[this.currPlayer]
+                  .playersList![this.currPlayer!]!
                   .playController
                   .getRandQuestion()
                   .description,
@@ -210,7 +206,6 @@ class PlayController {
             );
           },
         );
-        break;
       case 3:
         return showGeneralDialog(
           context: context,
@@ -222,12 +217,12 @@ class PlayController {
             return DisplayQuestion(
               card: card,
               text: this
-                  .playersList[this.currPlayer]
+                  .playersList![this.currPlayer!]!
                   .playController
                   .getRandQuestion()
                   .title,
               description: this
-                  .playersList[this.currPlayer]
+                  .playersList![this.currPlayer!]!
                   .playController
                   .getRandQuestion()
                   .description,
@@ -235,7 +230,6 @@ class PlayController {
             );
           },
         );
-        break;
       case 13:
         return showGeneralDialog(
           context: context,
@@ -247,12 +241,12 @@ class PlayController {
             return DisplayQuestion(
               card: card,
               text: this
-                  .playersList[this.currPlayer]
+                  .playersList![this.currPlayer!]!
                   .playController
                   .getRandQuestion()
                   .title,
               description: this
-                  .playersList[this.currPlayer]
+                  .playersList![this.currPlayer!]!
                   .playController
                   .getRandQuestion()
                   .description,
@@ -260,7 +254,6 @@ class PlayController {
             );
           },
         );
-        break;
       case 8:
         return showGeneralDialog(
           context: context,
@@ -272,12 +265,12 @@ class PlayController {
             return DisplayQuestion(
               card: card,
               text: this
-                  .playersList[this.currPlayer]
+                  .playersList![this.currPlayer!]!
                   .playController
                   .getRandQuestion()
                   .title,
               description: this
-                  .playersList[this.currPlayer]
+                  .playersList![this.currPlayer!]!
                   .playController
                   .getRandQuestion()
                   .description,
@@ -285,7 +278,6 @@ class PlayController {
             );
           },
         );
-        break;
       case 5:
         return showGeneralDialog(
           context: context,
@@ -297,12 +289,12 @@ class PlayController {
             return DisplayQuestion(
               card: card,
               text: this
-                  .playersList[this.currPlayer]
+                  .playersList![this.currPlayer!]!
                   .playController
                   .getRandQuestion()
                   .title,
               description: this
-                  .playersList[this.currPlayer]
+                  .playersList![this.currPlayer!]!
                   .playController
                   .getRandQuestion()
                   .description,
@@ -310,7 +302,6 @@ class PlayController {
             );
           },
         );
-        break;
       case 10:
         return showGeneralDialog(
           context: context,
@@ -322,12 +313,12 @@ class PlayController {
             return DisplayQuestion(
               card: card,
               text: this
-                  .playersList[this.currPlayer]
+                  .playersList![this.currPlayer!]!
                   .playController
                   .getRandQuestion()
                   .title,
               description: this
-                  .playersList[this.currPlayer]
+                  .playersList![this.currPlayer!]!
                   .playController
                   .getRandQuestion()
                   .description,
@@ -335,8 +326,30 @@ class PlayController {
             );
           },
         );
-        break;
       default:
+        return showGeneralDialog(
+          context: context,
+          barrierDismissible: false, // user must tap button!
+          transitionBuilder: (context, _animation, _secondAnimation, _child) {
+            return Animations.grow(_animation, _secondAnimation, _child);
+          },
+          pageBuilder: (_animation, _secondAnimation, _child) {
+            return DisplayQuestion(
+              card: card,
+              text: this
+                  .playersList![this.currPlayer!]!
+                  .playController
+                  .getRandQuestion()
+                  .title,
+              description: this
+                  .playersList![this.currPlayer!]!
+                  .playController
+                  .getRandQuestion()
+                  .description,
+              randomPlayer: randomPlayer,
+            );
+          },
+        );
     }
   }
 
@@ -345,13 +358,13 @@ class PlayController {
    */
 
   Future<void> myDialog(
-    CardDeck cardDeck,
+    CardDeck? cardDeck,
     String text,
-    String textToChangeInterface,
+    String? textToChangeInterface,
     BuildContext context,
-    String nextScreenName,
-    int tour,
-    int currPlayer,
+    String? nextScreenName,
+    int? tour,
+    int? currPlayer,
   ) {
     return showGeneralDialog(
       context: context,
@@ -384,14 +397,14 @@ class PlayController {
   Future<void> ifEveryOnPlays(
       BuildContext context,
       String text,
-      String textToChangeInterface,
-      String nextScreenName,
-      int tour,
-      int currPlayerr) async {
+      String? textToChangeInterface,
+      String? nextScreenName,
+      int? tour,
+      int? currPlayerr) async {
     switch (tour) {
       case 1:
-        for (Player player in this.playersList) {
-          if (player.getDeckLength() == tour) {
+        for (Player? player in this.playersList!) {
+          if (player!.getDeckLength() == tour) {
             myPopUp(
                 context, textToChangeInterface, nextScreenName, currPlayerr);
           } else {
@@ -417,8 +430,8 @@ class PlayController {
         }
         break;
       case 2:
-        for (Player player in this.playersList) {
-          if (player.getDeckLength() == tour) {
+        for (Player? player in this.playersList!) {
+          if (player!.getDeckLength() == tour) {
             myPopUp(
                 context, textToChangeInterface, nextScreenName, currPlayerr);
           } else {
@@ -443,8 +456,8 @@ class PlayController {
         }
         break;
       case 3:
-        for (Player player in this.playersList) {
-          if (player.getDeckLength() == tour) {
+        for (Player? player in this.playersList!) {
+          if (player!.getDeckLength() == tour) {
             myPopUp(
                 context, textToChangeInterface, nextScreenName, currPlayerr);
           } else {
@@ -469,8 +482,8 @@ class PlayController {
         }
         break;
       case 4:
-        for (Player player in this.playersList) {
-          if (player.getDeckLength() == tour) {
+        for (Player? player in this.playersList!) {
+          if (player!.getDeckLength() == tour) {
             myPopUp(
                 context, textToChangeInterface, nextScreenName, currPlayerr);
           } else {
@@ -498,8 +511,8 @@ class PlayController {
     }
   }
 
-  Future<void> myPopUp(BuildContext context, String text1,
-      String nextScreenName, int currPlayer) {
+  Future<void> myPopUp(BuildContext context, String? text1,
+      String? nextScreenName, int? currPlayer) {
     return showDialog(
       context: context,
       barrierDismissible: false, // user must tap button!
@@ -566,7 +579,7 @@ class PlayController {
                                 borderRadius: BorderRadius.circular(30.0),
                                 child: Center(
                                   child: Text(
-                                    text1,
+                                    text1!,
                                     textAlign: TextAlign.center,
                                     style: TextStyle(
                                       color: Color(0xFF3A3238),

@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
 class CardDeck {
-  int number;
-  int name;
-  String color;
-  String cardSymbole;
-  Image img;
+  int? number;
+  int? name;
+  String? color;
+  String? cardSymbole;
+  Image? img;
 
   CardDeck({
     this.number,
@@ -15,15 +15,15 @@ class CardDeck {
     this.img,
   });
 
-  int getNumber() {
+  int? getNumber() {
     return this.number;
   }
 
-  int getName() {
+  int? getName() {
     return this.name;
   }
 
-  String getCardColor() {
+  String? getCardColor() {
     return this.color;
   }
 }

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:my_pyramid/model/constants.dart';
 import 'package:my_pyramid/vues/components/background.dart';
 import 'package:my_pyramid/vues/splash/splashScreen.dart';
@@ -69,8 +68,8 @@ class _LoaderState extends State<Loader> {
 class AnimeBackground extends StatelessWidget {
   final String imageURL;
   const AnimeBackground({
-    Key key,
-    @required this.imageURL,
+    Key? key,
+    required this.imageURL,
   }) : super(key: key);
 
   @override

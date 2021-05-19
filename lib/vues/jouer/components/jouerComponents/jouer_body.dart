@@ -14,14 +14,14 @@ class JouerBody extends StatefulWidget {
 
 class _JouerBodyState extends State<JouerBody> {
   var _controller = TextEditingController();
-  List<Player> playersList = [];
-  Player player;
+  List<Player?> playersList = [];
+  Player? player;
   int currPlayer = 0;
   GameDeck gameDeck = new GameDeck();
-  CardDeck card;
-  String currentCard;
+  CardDeck? card;
+  String? currentCard;
   bool nextScreen = false;
-  String temp;
+  String? temp;
 
   @override
   Widget build(BuildContext context) {
@@ -59,8 +59,10 @@ class _JouerBodyState extends State<JouerBody> {
                 temp = value;
               },
               onSubmitted: (value) {
-                temp = value;
+                setState(() {
+                  temp = value;
                   addPlayer(context);
+                });
               },
               cursorColor: Colors.white,
               cursorHeight: 25.0,
@@ -93,7 +95,9 @@ class _JouerBodyState extends State<JouerBody> {
                       color: Colors.white,
                       icon: Icon(Icons.add, size: 30,),
                       onPressed: () {
-                        addPlayer(context);
+                        setState(() {
+                          addPlayer(context);
+                        });
                       },
                     ),
                     IconButton(
@@ -189,11 +193,13 @@ class _JouerBodyState extends State<JouerBody> {
                         backgroundColor:
                             Colors.brown[playersList[index].hashCode],
                       ),
-                      title: Text(playersList[index].name, style: TextStyle(fontSize: 45,)),
+                      title: Text(playersList[index]!.name!, style: TextStyle(fontSize: 45,)),
                       subtitle: Text('Let\'s get it', style: TextStyle(fontSize: 25,),),
                       trailing: TextButton(
                         onPressed: () {
-                          removePlayer(playersList[index]);
+                          setState(() {
+                            removePlayer(playersList[index]);
+                          });
                         },
                         child: Icon(
                           Icons.cancel,
@@ -295,9 +301,9 @@ class _JouerBodyState extends State<JouerBody> {
     );
   }
 
-  void removePlayer(Player e) {
+  void removePlayer(Player? e) {
     return setState(() {
-      playersList.removeWhere((element) => element.name == e.name);
+      playersList.removeWhere((element) => element!.name == e!.name);
       temp = null;
     });
   }

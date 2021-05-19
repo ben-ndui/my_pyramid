@@ -16,7 +16,7 @@ class Jouer {
   GameDeck gameDeck = GameDeck();
 
   Jouer() {
-    this.pList = new List();
+    this.pList = [];
     initDeck();
   }
 

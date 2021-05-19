@@ -7,18 +7,18 @@ import 'CardDeck.dart';
 import 'GameDeck.dart';
 
 class Player {
-  String name;
-  PlayController playController;
-  List<CardDeck> deck = [];
+  String? name;
+  late PlayController playController;
+  List<CardDeck?> deck = [];
 
   Player(
-    String name,
-    List<Player> playersList,
-    Player currentPlayer,
+    String? name,
+    List<Player?> playersList,
+    Player? currentPlayer,
     int currPlayer,
     GameDeck gameDeck,
-    CardDeck card,
-    String currentCard,
+    CardDeck? card,
+    String? currentCard,
     bool nextScreen,
   ) {
     this.name = name;
@@ -35,7 +35,7 @@ class Player {
 
   ///
   /// Add card to current player deck
-  void addCard(CardDeck card) {
+  void addCard(CardDeck? card) {
     this.deck.add(card);
   }
 
@@ -49,12 +49,12 @@ class Player {
    * En allant du plus petit au plus grand
    */
   void organiseDeck() {
-    CardDeck save;
+    CardDeck? save;
     var i;
     if (this.getDeckLength() > 1) {
       for (i = 0; i < this.getDeckLength() - 1; i++) {
-        if (this.deck[i].number != this.deck[i + 1].number &&
-            this.deck[i].number > this.deck[i + 1].number) {
+        if (this.deck[i]!.number != this.deck[i + 1]!.number &&
+            this.deck[i]!.number! > this.deck[i + 1]!.number!) {
           save = this.deck[i];
           this.deck[i] = this.deck[i + 1];
           this.deck[i + 1] = save;
@@ -79,9 +79,9 @@ class Player {
    * Cette fonction prend la réponse du joueur le tour et une carte en paramettre
    * Retourne une réponse boulean en fonction des phase de jeu ici "tour"
    */
-  bool play(String choice, int tour, CardDeck cardDeck, BuildContext context,
-      String nextScreenName, String nextScreenMessage, int currPlayer) {
-    bool answer;
+  bool? play(String choice, int? tour, CardDeck? cardDeck, BuildContext context,
+      String? nextScreenName, String? nextScreenMessage, int? currPlayer) {
+    bool? answer;
     switch (tour) {
       case 1:
         answer = this.rougeOuNoirPhase(choice, tour, cardDeck);
@@ -115,11 +115,11 @@ class Player {
    * Cette fonction regarde si la réponse du jouer "choice" 
    * correspond a la carte au hasard généré
    */
-  bool rougeOuNoirPhase(String choice, int tour, CardDeck cardDeck) {
-    bool answer;
+  bool? rougeOuNoirPhase(String choice, int? tour, CardDeck? cardDeck) {
+    bool? answer;
     switch (choice) {
       case "red":
-        if (cardDeck.getCardColor() == "red") {
+        if (cardDeck!.getCardColor() == "red") {
           {
             answer = true;
             this.addCard(cardDeck);
@@ -130,7 +130,7 @@ class Player {
         }
         break;
       case "black":
-        if (cardDeck.getCardColor() == "black") {
+        if (cardDeck!.getCardColor() == "black") {
           answer = true;
           this.addCard(cardDeck);
         } else {
@@ -143,11 +143,11 @@ class Player {
     return answer;
   }
 
-  bool plusMinusPhase(String choice, int tour, CardDeck cardDeck) {
-    bool answer;
+  bool? plusMinusPhase(String choice, int? tour, CardDeck? cardDeck) {
+    bool? answer;
     switch (choice) {
       case "red":
-        if (cardDeck.getNumber() <= this.deck[0].number) {
+        if (cardDeck!.getNumber()! <= this.deck[0]!.number!) {
           {
             answer = true;
             this.addCard(cardDeck);
@@ -158,7 +158,7 @@ class Player {
         }
         break;
       case "black":
-        if (cardDeck.getNumber() >= this.deck[0].getNumber()) {
+        if (cardDeck!.getNumber()! >= this.deck[0]!.getNumber()!) {
           answer = true;
           this.addCard(cardDeck);
         } else {
@@ -172,12 +172,12 @@ class Player {
     return answer;
   }
 
-  bool interExterPhase(String choice, int tour, CardDeck cardDeck) {
-    bool answer;
+  bool? interExterPhase(String choice, int? tour, CardDeck? cardDeck) {
+    bool? answer;
     switch (choice) {
       case "red":
-        if ((cardDeck.getNumber() > this.deck[0].number) &&
-            (cardDeck.getNumber() <= this.deck[1].number)) {
+        if ((cardDeck!.getNumber()! > this.deck[0]!.number!) &&
+            (cardDeck.getNumber()! <= this.deck[1]!.number!)) {
           {
             answer = true;
             this.addCard(cardDeck);
@@ -188,8 +188,8 @@ class Player {
         }
         break;
       case "black":
-        if ((cardDeck.getNumber() < this.deck[0].number) &&
-            (cardDeck.getNumber() >= this.deck[1].number)) {
+        if ((cardDeck!.getNumber()! < this.deck[0]!.number!) &&
+            (cardDeck.getNumber()! >= this.deck[1]!.number!)) {
           answer = false;
           this.addCard(cardDeck);
         } else {
@@ -203,11 +203,11 @@ class Player {
     return answer;
   }
 
-  bool symboleChoice(String choice, int tour, CardDeck cardDeck) {
-    bool answer;
+  bool? symboleChoice(String choice, int? tour, CardDeck? cardDeck) {
+    bool? answer;
     switch (choice) {
       case "pique":
-        if (cardDeck.cardSymbole == "prique") {
+        if (cardDeck!.cardSymbole == "prique") {
           answer = true;
           this.addCard(cardDeck);
         } else {
@@ -216,7 +216,7 @@ class Player {
         }
         break;
       case "trefle":
-        if (cardDeck.cardSymbole == "trefle") {
+        if (cardDeck!.cardSymbole == "trefle") {
           answer = true;
           this.addCard(cardDeck);
         } else {
@@ -225,7 +225,7 @@ class Player {
         }
         break;
       case "coeur":
-        if (cardDeck.cardSymbole == "coeur") {
+        if (cardDeck!.cardSymbole == "coeur") {
           answer = true;
           this.addCard(cardDeck);
         } else {
@@ -234,7 +234,7 @@ class Player {
         }
         break;
       case "carreau":
-        if (cardDeck.cardSymbole == "carreau") {
+        if (cardDeck!.cardSymbole == "carreau") {
           answer = true;
           this.addCard(cardDeck);
         } else {

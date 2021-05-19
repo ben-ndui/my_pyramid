@@ -1,6 +1,6 @@
 class Splash{
-  int id;
-  String name, description;
+  int? id;
+  String? name, description;
 
   Splash({
     this.name,

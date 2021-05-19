@@ -8,34 +8,34 @@ import 'PlayGameMethod.dart';
 import 'components/gameBody.dart';
 
 class GameScreen extends StatefulWidget {
-  List<Player> playersList;
-  Player currentPlayer;
+  List<Player?>? playersList;
+  Player? currentPlayer;
 
-  int tour;
-  int currPlayer;
+  int? tour;
+  int? currPlayer;
 
-  CardDeck card;
-  bool nextScreen;
-  String currentCard;
+  CardDeck? card;
+  bool? nextScreen;
+  String? currentCard;
   String nextScreenBackground;
   String firstBtnImageURL;
   String secondBtnImageURL;
-  String nextScreenName;
+  String? nextScreenName;
   String nextScreenMessage;
 
-  GameDeck gameDeck;
+  GameDeck? gameDeck;
 
   GameScreen({
-    @required this.playersList,
-    @required this.tour,
-    @required this.nextScreen,
-    @required this.nextScreenBackground,
-    @required this.firstBtnImageURL,
-    @required this.secondBtnImageURL,
-    @required this.nextScreenName,
-    @required this.nextScreenMessage,
-    @required this.gameDeck,
-    @required this.currPlayer,
+    required this.playersList,
+    required this.tour,
+    required this.nextScreen,
+    required this.nextScreenBackground,
+    required this.firstBtnImageURL,
+    required this.secondBtnImageURL,
+    required this.nextScreenName,
+    required this.nextScreenMessage,
+    required this.gameDeck,
+    required this.currPlayer,
   });
 
   @override
@@ -57,38 +57,38 @@ class GameScreen extends StatefulWidget {
 }
 
 class _GameScreenState extends State<GameScreen> {
-  List<Player> playersList;
-  Player currentPlayer;
+  List<Player?>? playersList;
+  Player? currentPlayer;
 
-  int tour;
-  int currPlayer;
-  bool nextScreen;
+  int? tour;
+  int? currPlayer;
+  bool? nextScreen;
 
-  String currentCard;
-  String nextScreenBackground;
-  String firstBtnImageURL;
-  String secondBtnImageURL;
-  String nextScreenName;
-  String nextScreenMessage;
+  String? currentCard;
+  String? nextScreenBackground;
+  String? firstBtnImageURL;
+  String? secondBtnImageURL;
+  String? nextScreenName;
+  String? nextScreenMessage;
 
-  CardDeck card;
-  GameDeck gameDeck;
-  PlayController playController;
+  CardDeck? card;
+  GameDeck? gameDeck;
+  PlayController? playController;
 
   _GameScreenState(
-    List<Player> playersList,
-    Player currentPlayer,
-    int tour,
-    CardDeck card,
-    bool nextScreen,
-    String currentCard,
+    List<Player?>? playersList,
+    Player? currentPlayer,
+    int? tour,
+    CardDeck? card,
+    bool? nextScreen,
+    String? currentCard,
     String nextScreenBackground,
     String firstBtnImageURL,
     String secondBtnImageURL,
-    String nextScreenName,
+    String? nextScreenName,
     String nextScreenMessage,
-    GameDeck gameDeck,
-    int currPlayer,
+    GameDeck? gameDeck,
+    int? currPlayer,
   ) {
     this.playersList = playersList;
     this.currentPlayer = currentPlayer;

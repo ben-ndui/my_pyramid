@@ -7,7 +7,7 @@ import '../home_screen.dart';
 
 class Inter extends StatefulWidget {
   const Inter({
-    Key key,
+    Key? key,
   }) : super(key: key);
 
   @override
