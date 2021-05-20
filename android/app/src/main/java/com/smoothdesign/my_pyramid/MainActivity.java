@@ -1,4 +1,4 @@
-package com.example.my_pyramid;
+package com.smoothdesign.my_pyramid;
 
 import io.flutter.embedding.android.FlutterActivity;
 

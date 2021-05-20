@@ -35,7 +35,7 @@ class _SplashBodyState extends State<SplashBody> {
         ),
         Container(
           alignment: Alignment.bottomCenter,
-          margin: EdgeInsets.only(bottom: 230),
+          margin: EdgeInsets.only(bottom: 130),
           child: TextButton(
             style: TextButton.styleFrom(
               padding: EdgeInsets.all(5),
@@ -69,13 +69,13 @@ class _SplashBodyState extends State<SplashBody> {
               );
             },
             child: Container(
-              width: 150,
+              width: 100,
               child: Text(
                 "Jouer",
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   color: Colors.white,
-                  fontSize: 50,
+                  fontSize: 30,
                 ),
               ),
             ),

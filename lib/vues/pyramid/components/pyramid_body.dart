@@ -186,273 +186,250 @@ class _SmoothPyramidBodyState extends State<SmoothPyramidBody> {
   @override
   Widget build(BuildContext context) {
 
-    return WillPopScope(
-      onWillPop: () {
-        showDialog(
-          context: context,
-          builder: (context) => AlertDialog(
-            title: Text(
-              "Tour ${this.tour}",
+    return Container(
+      padding: EdgeInsets.only(
+        top: MediaQuery.of(context).size.width / 5,
+      ),
+      child: Column(
+        children: [
+          /** Ici le block du bouton quitter */
+          Container(
+            // color: Colors.green,
+            alignment: Alignment.topRight,
+            child: TextButton(
+              onPressed: () {
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (context) => Inter(),
+                  ),
+                );
+              },
+              child: Icon(
+                Icons.logout,
+                color: Colors.white,
+                size: 40.0,
+              ),
             ),
-            content: Text(
-              "On ne peut plus retourner en arrière a partir de maintenant !",
+          ),
+          Container(
+            // color: Colors.green,
+            width: 75.0,
+            padding: EdgeInsets.all(0),
+            child: Stack(
+              children: [
+                GestureDetector(
+                  onTap: () {
+                    setState(() {
+                      this.card =
+                          this.playersList![this.currPlayer]!.getRandCard();
+                      this.url1 = this.card!.img;
+                      this
+                          .playersList![currPlayer]!
+                          .playController
+                          .questionTime(this.card!, context);
+                    });
+                  },
+                  child: Center(
+                    child: url1,
+                  ),
+                ),
+              ],
             ),
-            actions: [
-              TextButton(
-                onPressed: () {
-                  Navigator.of(context).pop();
+          ),
+          SizedBox(
+            height: 5,
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              GestureDetector(
+                onTap: () {
+                  setState(() {
+                    this.card =
+                        this.playersList![this.currPlayer]!.getRandCard();
+                    this.url2 = this.card!.img;
+                    this
+                        .playersList![currPlayer]!
+                        .playController
+                        .questionTime(this.card!, context);
+                  });
                 },
-                child: Text("🍺"),
+                child: Container(
+                  margin: EdgeInsets.only(left: 100),
+                  width: 75.0,
+                  child: url2, //image
+                ),
+              ),
+              GestureDetector(
+                onTap: () {
+                  setState(() {
+                    this.card =
+                        this.playersList![this.currPlayer]!.getRandCard();
+                    this.url3 = this.card!.img;
+                    this
+                        .playersList![currPlayer]!
+                        .playController
+                        .questionTime(this.card!, context);
+                  });
+                },
+                child: Container(
+                  margin: EdgeInsets.only(right: 100),
+                  width: 75.0,
+                  child: url3, //image
+                ),
               ),
             ],
           ),
-        ) as Future<bool>;
-      } as Future<bool> Function()?,
-      child: Container(
-        padding: EdgeInsets.only(
-          top: MediaQuery.of(context).size.width / 5,
-        ),
-        child: Column(
-          children: [
-            /** Ici le block du bouton quitter */
-            Container(
-              // color: Colors.green,
-              alignment: Alignment.topRight,
-              child: TextButton(
-                onPressed: () {
-                  Navigator.of(context).push(
-                    MaterialPageRoute(
-                      builder: (context) => Inter(),
-                    ),
-                  );
+          SizedBox(
+            height: 5,
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              GestureDetector(
+                onTap: () {
+                  setState(() {
+                    this.card =
+                        this.playersList![this.currPlayer]!.getRandCard();
+                    this.url4 = this.card!.img;
+                    this
+                        .playersList![currPlayer]!
+                        .playController
+                        .questionTime(this.card!, context);
+                  });
                 },
-                child: Icon(
-                  Icons.logout,
-                  color: Colors.white,
-                  size: 40.0,
+                child: Container(
+                  margin: EdgeInsets.only(left: 50.0),
+                  width: 75.0,
+                  child: url4, //image
                 ),
               ),
-            ),
-            Container(
-              // color: Colors.green,
-              width: 75.0,
-              padding: EdgeInsets.all(0),
-              child: Stack(
-                children: [
-                  GestureDetector(
-                    onTap: () {
-                      setState(() {
-                        this.card =
-                            this.playersList![this.currPlayer]!.getRandCard();
-                        this.url1 = this.card!.img;
-                        this
-                            .playersList![currPlayer]!
-                            .playController
-                            .questionTime(this.card!, context);
-                      });
-                    },
-                    child: Center(
-                      child: url1,
-                    ),
-                  ),
-                ],
+              GestureDetector(
+                onTap: () {
+                  setState(() {
+                    this.card =
+                        this.playersList![this.currPlayer]!.getRandCard();
+                    this.url5 = this.card!.img;
+                    this
+                        .playersList![currPlayer]!
+                        .playController
+                        .questionTime(this.card!, context);
+                  });
+                },
+                child: Container(
+                  width: 75.0,
+                  child: url5, //image
+                ),
               ),
-            ),
-            SizedBox(
-              height: 5,
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                GestureDetector(
-                  onTap: () {
-                    setState(() {
-                      this.card =
-                          this.playersList![this.currPlayer]!.getRandCard();
-                      this.url2 = this.card!.img;
-                      this
-                          .playersList![currPlayer]!
-                          .playController
-                          .questionTime(this.card!, context);
-                    });
-                  },
-                  child: Container(
-                    margin: EdgeInsets.only(left: 100),
-                    width: 75.0,
-                    child: url2, //image
-                  ),
+              GestureDetector(
+                onTap: () {
+                  setState(() {
+                    this.card =
+                        this.playersList![this.currPlayer]!.getRandCard();
+                    this.url6 = this.card!.img;
+                    this
+                        .playersList![currPlayer]!
+                        .playController
+                        .questionTime(this.card!, context);
+                  });
+                },
+                child: Container(
+                  margin: EdgeInsets.only(right: 50.0),
+                  width: 75.0,
+                  child: url6, //image
                 ),
-                GestureDetector(
-                  onTap: () {
-                    setState(() {
-                      this.card =
-                          this.playersList![this.currPlayer]!.getRandCard();
-                      this.url3 = this.card!.img;
-                      this
-                          .playersList![currPlayer]!
-                          .playController
-                          .questionTime(this.card!, context);
-                    });
-                  },
-                  child: Container(
-                    margin: EdgeInsets.only(right: 100),
-                    width: 75.0,
-                    child: url3, //image
-                  ),
+              ),
+            ],
+          ),
+          SizedBox(
+            height: 5,
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              GestureDetector(
+                onTap: () {
+                  setState(() {
+                    this.card =
+                        this.playersList![this.currPlayer]!.getRandCard();
+                    this.url7 = this.card!.img;
+                    this
+                        .playersList![currPlayer]!
+                        .playController
+                        .questionTime(this.card!, context);
+                  });
+                },
+                child: Container(
+                  margin: EdgeInsets.only(left: 2.5),
+                  width: 75.0,
+                  child: url7, //image
                 ),
-              ],
-            ),
-            SizedBox(
-              height: 5,
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                GestureDetector(
-                  onTap: () {
-                    setState(() {
-                      this.card =
-                          this.playersList![this.currPlayer]!.getRandCard();
-                      this.url4 = this.card!.img;
-                      this
-                          .playersList![currPlayer]!
-                          .playController
-                          .questionTime(this.card!, context);
-                    });
-                  },
-                  child: Container(
-                    margin: EdgeInsets.only(left: 50.0),
-                    width: 75.0,
-                    child: url4, //image
-                  ),
+              ),
+              GestureDetector(
+                onTap: () {
+                  setState(() {
+                    this.card =
+                        this.playersList![this.currPlayer]!.getRandCard();
+                    this.url8 = this.card!.img;
+                    this
+                        .playersList![currPlayer]!
+                        .playController
+                        .questionTime(this.card!, context);
+                  });
+                },
+                child: Container(
+                  margin: EdgeInsets.only(left: 1.0, right: 1.0),
+                  width: 75.0,
+                  child: url8, //image
                 ),
-                GestureDetector(
-                  onTap: () {
-                    setState(() {
-                      this.card =
-                          this.playersList![this.currPlayer]!.getRandCard();
-                      this.url5 = this.card!.img;
-                      this
-                          .playersList![currPlayer]!
-                          .playController
-                          .questionTime(this.card!, context);
-                    });
-                  },
-                  child: Container(
-                    width: 75.0,
-                    child: url5, //image
-                  ),
+              ),
+              GestureDetector(
+                onTap: () {
+                  setState(() {
+                    this.card =
+                        this.playersList![this.currPlayer]!.getRandCard();
+                    this.url9 = this.card!.img;
+                    this
+                        .playersList![currPlayer]!
+                        .playController
+                        .questionTime(this.card!, context);
+                  });
+                },
+                child: Container(
+                  margin: EdgeInsets.only(left: 1.0, right: 1.0),
+                  width: 75.0,
+                  child: url9, //image
                 ),
-                GestureDetector(
-                  onTap: () {
-                    setState(() {
-                      this.card =
-                          this.playersList![this.currPlayer]!.getRandCard();
-                      this.url6 = this.card!.img;
-                      this
-                          .playersList![currPlayer]!
-                          .playController
-                          .questionTime(this.card!, context);
-                    });
-                  },
-                  child: Container(
-                    margin: EdgeInsets.only(right: 50.0),
-                    width: 75.0,
-                    child: url6, //image
-                  ),
+              ),
+              GestureDetector(
+                onTap: () {
+                  setState(() {
+                    this.card =
+                        this.playersList![this.currPlayer]!.getRandCard();
+                    this.url10 = this.card!.img;
+                    this
+                        .playersList![currPlayer]!
+                        .playController
+                        .questionTime(this.card!, context);
+                  });
+                },
+                child: Container(
+                  margin: EdgeInsets.only(right: 2.5),
+                  width: 75.0,
+                  child: url10, //image
                 ),
-              ],
-            ),
-            SizedBox(
-              height: 5,
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                GestureDetector(
-                  onTap: () {
-                    setState(() {
-                      this.card =
-                          this.playersList![this.currPlayer]!.getRandCard();
-                      this.url7 = this.card!.img;
-                      this
-                          .playersList![currPlayer]!
-                          .playController
-                          .questionTime(this.card!, context);
-                    });
-                  },
-                  child: Container(
-                    margin: EdgeInsets.only(left: 2.5),
-                    width: 75.0,
-                    child: url7, //image
-                  ),
-                ),
-                GestureDetector(
-                  onTap: () {
-                    setState(() {
-                      this.card =
-                          this.playersList![this.currPlayer]!.getRandCard();
-                      this.url8 = this.card!.img;
-                      this
-                          .playersList![currPlayer]!
-                          .playController
-                          .questionTime(this.card!, context);
-                    });
-                  },
-                  child: Container(
-                    margin: EdgeInsets.only(left: 1.0, right: 1.0),
-                    width: 75.0,
-                    child: url8, //image
-                  ),
-                ),
-                GestureDetector(
-                  onTap: () {
-                    setState(() {
-                      this.card =
-                          this.playersList![this.currPlayer]!.getRandCard();
-                      this.url9 = this.card!.img;
-                      this
-                          .playersList![currPlayer]!
-                          .playController
-                          .questionTime(this.card!, context);
-                    });
-                  },
-                  child: Container(
-                    margin: EdgeInsets.only(left: 1.0, right: 1.0),
-                    width: 75.0,
-                    child: url9, //image
-                  ),
-                ),
-                GestureDetector(
-                  onTap: () {
-                    setState(() {
-                      this.card =
-                          this.playersList![this.currPlayer]!.getRandCard();
-                      this.url10 = this.card!.img;
-                      this
-                          .playersList![currPlayer]!
-                          .playController
-                          .questionTime(this.card!, context);
-                    });
-                  },
-                  child: Container(
-                    margin: EdgeInsets.only(right: 2.5),
-                    width: 75.0,
-                    child: url10, //image
-                  ),
-                ),
-              ],
-            ),
-            SizedBox(
-              height: MediaQuery.of(context).size.width / 7,
-            ),
-            CheckMyDeck(
-              playersList: this.playersList,
-              currPlayer: this.currPlayer,
-            )
-          ],
-        ),
+              ),
+            ],
+          ),
+          SizedBox(
+            height: 10,
+          ),
+          CheckMyDeck(
+            playersList: this.playersList,
+            currPlayer: this.currPlayer,
+          )
+        ],
       ),
     );
   }

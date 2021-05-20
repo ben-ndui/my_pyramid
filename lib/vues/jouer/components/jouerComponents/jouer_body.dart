@@ -214,7 +214,7 @@ class _JouerBodyState extends State<JouerBody> {
           ),
           Container(
             alignment: Alignment.bottomCenter,
-            margin: EdgeInsets.only(bottom: 230),
+            margin: EdgeInsets.only(bottom: 10),
             child: TextButton(
               style: TextButton.styleFrom(
                 padding: EdgeInsets.all(5),
