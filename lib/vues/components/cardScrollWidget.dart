@@ -5,6 +5,7 @@ import 'package:my_pyramid/model/constants.dart';
 
 import 'data.dart';
 
+// ignore: must_be_immutable
 class CardScrollWidget extends StatelessWidget {
   var currentPage;
   var padding = 40.0;

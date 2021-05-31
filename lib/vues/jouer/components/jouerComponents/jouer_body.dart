@@ -30,23 +30,7 @@ class _JouerBodyState extends State<JouerBody> {
       child: Stack(
         children: [
           HomeBackground(homeBackURL: "assets/backgrounds/play.svg"),
-          Container(
-            width: 30,
-            height: 30,
-            margin: EdgeInsets.only(top: 60, left: 30),
-            child: FloatingActionButton(
-              backgroundColor: Colors.deepPurple,
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
-              child: Center(
-                child: Icon(
-                  Icons.arrow_back_ios,
-                  size: 20,
-                ),
-              ),
-            ),
-          ),
+          backButton(context),
           Padding(
             padding: const EdgeInsets.only(
               top: 100,
@@ -93,20 +77,14 @@ class _JouerBodyState extends State<JouerBody> {
                   children: [
                     IconButton(
                       color: Colors.white,
-                      icon: Icon(Icons.add, size: 30,),
-                      onPressed: () {
-                        setState(() {
-                          addPlayer(context);
-                        });
-                      },
-                    ),
-                    IconButton(
-                      color: Colors.white,
                       icon: Icon(Icons.play_arrow_sharp),
                       onPressed: () {
                         setState(
                           () {
                             this.gameDeck.initDeck();
+
+                            /// Si le nombre de joueur est suffisant, je lance le jeu ->
+                            /// Redirection vers first setp of the game
                             if (this.playersList.length > 0) {
                               Navigator.push(
                                 context,
@@ -140,7 +118,7 @@ class _JouerBodyState extends State<JouerBody> {
                                           "assets/backgrounds/components/blackChoice.png",
                                       nextScreenName: "PlusOuMoinsScreen",
                                       nextScreenMessage:
-                                          "Allez hop, \n PLUS or MINUS !!",
+                                          "Allez hop, \n Plus ou Moins !!",
                                       gameDeck: this.gameDeck,
                                       currPlayer: 0,
                                     );
@@ -176,8 +154,7 @@ class _JouerBodyState extends State<JouerBody> {
             ),
           ),
           Container(
-            margin:
-                EdgeInsets.only(top: size.height/5),
+            margin: EdgeInsets.only(top: size.height / 5),
             // color: Colors.green,
             height: MediaQuery.of(context).size.height,
             child: ListView.builder(
@@ -193,8 +170,16 @@ class _JouerBodyState extends State<JouerBody> {
                         backgroundColor:
                             Colors.brown[playersList[index].hashCode],
                       ),
-                      title: Text(playersList[index]!.name!, style: TextStyle(fontSize: 45,)),
-                      subtitle: Text('Let\'s get it', style: TextStyle(fontSize: 25,),),
+                      title: Text(playersList[index]!.name!,
+                          style: TextStyle(
+                            fontSize: 45,
+                          )),
+                      subtitle: Text(
+                        'Let\'s get it',
+                        style: TextStyle(
+                          fontSize: 25,
+                        ),
+                      ),
                       trailing: TextButton(
                         onPressed: () {
                           setState(() {
@@ -212,91 +197,112 @@ class _JouerBodyState extends State<JouerBody> {
               },
             ),
           ),
-          Container(
-            alignment: Alignment.bottomCenter,
-            margin: EdgeInsets.only(bottom: 10),
-            child: TextButton(
-              style: TextButton.styleFrom(
-                padding: EdgeInsets.all(5),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.all(Radius.circular(50)),
-                ),
-                backgroundColor: Colors.black,
-              ),
-              onPressed: () {
-                setState(
-                      () {
-                    this.gameDeck.initDeck();
-                    if (this.playersList.length > 0) {
-                      Navigator.push(
-                        context,
-                        PageRouteBuilder(
-                          transitionDuration: Duration(
-                            milliseconds: 1000,
-                          ),
-                          transitionsBuilder: (context, animation,
-                              animationTime, child) {
-                            animation = CurvedAnimation(
-                              parent: animation,
-                              curve: Curves.elasticInOut,
-                            );
-                            return ScaleTransition(
-                              alignment: Alignment.center,
-                              scale: animation,
-                              child: child,
-                            );
-                          },
-                          pageBuilder:
-                              (context, animation, animationTime) {
-                            return GameScreen(
-                              playersList: this.playersList,
-                              tour: 1,
-                              nextScreen: this.nextScreen,
-                              nextScreenBackground:
-                              "assets/backgrounds/fisrt.png",
-                              firstBtnImageURL:
-                              "assets/backgrounds/components/redChoice.png",
-                              secondBtnImageURL:
-                              "assets/backgrounds/components/blackChoice.png",
-                              nextScreenName: "PlusOuMoinsScreen",
-                              nextScreenMessage:
-                              "Allez hop, \n PLUS or MINUS !!",
-                              gameDeck: this.gameDeck,
-                              currPlayer: 0,
-                            );
-                          },
-                        ),
+          playButton(context),
+        ],
+      ),
+    );
+  }
+
+  Container playButton(BuildContext context) {
+    return Container(
+      alignment: Alignment.bottomCenter,
+      margin: EdgeInsets.only(bottom: 10),
+      child: TextButton(
+        style: TextButton.styleFrom(
+          padding: EdgeInsets.all(5),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.all(Radius.circular(50)),
+          ),
+          backgroundColor: Colors.black,
+        ),
+        onPressed: () {
+          setState(
+            () {
+              this.gameDeck.initDeck();
+              if (this.playersList.length > 0) {
+                Navigator.push(
+                  context,
+                  PageRouteBuilder(
+                    transitionDuration: Duration(
+                      milliseconds: 1000,
+                    ),
+                    transitionsBuilder:
+                        (context, animation, animationTime, child) {
+                      animation = CurvedAnimation(
+                        parent: animation,
+                        curve: Curves.elasticInOut,
                       );
-                    } else {
-                      showDialog(
-                        context: context,
-                        builder: (BuildContext context) {
-                          return CustomDialogBox(
-                            title: "Bruuuh",
-                            descriptions:
-                            "On peut pas jouer la, tu n'as entré aucun joueur.. ",
-                            text: "Okay",
-                          );
-                        },
+                      return ScaleTransition(
+                        alignment: Alignment.center,
+                        scale: animation,
+                        child: child,
                       );
-                    }
+                    },
+                    pageBuilder: (context, animation, animationTime) {
+                      return GameScreen(
+                        playersList: this.playersList,
+                        tour: 1,
+                        nextScreen: this.nextScreen,
+                        nextScreenBackground: "assets/backgrounds/fisrt.png",
+                        firstBtnImageURL:
+                            "assets/backgrounds/components/redChoice.png",
+                        secondBtnImageURL:
+                            "assets/backgrounds/components/blackChoice.png",
+                        nextScreenName: "PlusOuMoinsScreen",
+                        nextScreenMessage: "Allez hop, \n Plus ou Moins !!",
+                        gameDeck: this.gameDeck,
+                        currPlayer: 0,
+                      );
+                    },
+                  ),
+                );
+              } else {
+                showDialog(
+                  context: context,
+                  builder: (BuildContext context) {
+                    return CustomDialogBox(
+                      title: "Bruuuh",
+                      descriptions:
+                          "On peut pas jouer la, tu n'as entré aucun joueur.. ",
+                      text: "Okay",
+                    );
                   },
                 );
-              },
-              child: Container(
-                width: 150,
-                child: Text(
-                  "Jouer",
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 40,
-                  ),
-                ),
-              ),
+              }
+            },
+          );
+        },
+        child: Container(
+          width: 150,
+          child: Text(
+            "Jouer",
+            textAlign: TextAlign.center,
+            style: TextStyle(
+              color: Colors.white,
+              fontSize: 40,
             ),
           ),
-        ],
+        ),
+      ),
+    );
+  }
+
+  Container backButton(BuildContext context) {
+    return Container(
+      width: 30,
+      height: 30,
+      margin: EdgeInsets.only(top: 60, left: 30),
+      child: FloatingActionButton(
+        backgroundColor: Colors.deepPurple,
+        onPressed: () {
+          Navigator.of(context).pop();
+        },
+        child: Center(
+          child: Icon(
+            Icons.arrow_back_ios,
+            size: 20,
+          ),
+        ),
       ),
     );
   }
@@ -309,36 +315,35 @@ class _JouerBodyState extends State<JouerBody> {
   }
 
   Future<void> addPlayer(BuildContext context) async {
-      if (temp != null) {
-        player = Player(
-          temp,
-          playersList,
-          player,
-          currPlayer,
-          gameDeck,
-          null,
-          null,
-          nextScreen,
-        );
-        if (playersList.contains(player)) {
-          print("deja inscrit");
-        }
-        playersList.add(player);
-        _controller.clear();
-        temp = null;
-      } else {
-        return showDialog(
-          context: context,
-          builder: (BuildContext context) {
-            return CustomDialogBox(
-              title: "👻",
-              descriptions:
-              "Tu n'as entré aucun joueur.. ",
-              text: "Bruuh",
-            );
-          },
-        );
+    if (temp != null) {
+      player = Player(
+        temp,
+        playersList,
+        player,
+        currPlayer,
+        gameDeck,
+        null,
+        null,
+        nextScreen,
+      );
+      if (playersList.contains(player)) {
+        print("deja inscrit");
       }
+      playersList.add(player);
+      _controller.clear();
+      temp = null;
+    } else {
+      return showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return CustomDialogBox(
+            title: "👻",
+            descriptions: "Tu n'as entré aucun joueur.. ",
+            text: "Bruuh",
+          );
+        },
+      );
+    }
   }
 }
 

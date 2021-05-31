@@ -138,7 +138,7 @@ class _GameBodyState extends State<GameBody> {
   Widget build(BuildContext context) {
     return WillPopScope(
       onWillPop: () {
-        return showDialog(
+        showDialog(
           context: context,
           builder: (context) => AlertDialog(
             title: Text(
@@ -216,8 +216,8 @@ class _GameBodyState extends State<GameBody> {
                   this.gameDeck!.gameDeck.remove(card);
                   this.playController.isWinOrNot(
                         card,
-                        "Yes Brothaaa \n\n Tu as gagné, distribue $tour a qui tu veux !!",
-                        "Bruuh.. \n\n Vas-y prends $tour verre",
+                        "Yes Brothaaa \n\n Tu as gagné, distribues $tour gorgée(s) a qui tu veux !!",
+                        "Raté !! \n\n Vas-y prends $tour gorgée(s)..",
                         nextScreenMessage,
                         context,
                         nextScreenName,
@@ -257,8 +257,8 @@ class _GameBodyState extends State<GameBody> {
                   this.gameDeck!.gameDeck.remove(card);
                   this.playController.isWinOrNot(
                         card,
-                        "Yes Brothaaa \n\n Tu as gagné, distribue $tour a qui tu veux !!",
-                        "Bruuh.. \n\n Vas-y prends $tour verre",
+                        "Yes Brothaaa \n\n Tu as gagné, distribues $tour gorgée(s) à qui tu veux !!",
+                        "Raté!! \n\n Vas-y prends $tour gorgée(s)",
                         nextScreenMessage,
                         context,
                         nextScreenName,

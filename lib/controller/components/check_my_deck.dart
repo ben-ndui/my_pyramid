@@ -25,63 +25,85 @@ class CheckMyDeck extends StatelessWidget {
             context: context,
             barrierDismissible: false, // user must tap button!
             builder: (BuildContext context) {
-              return GestureDetector(
-                onTap: () => Navigator.of(context).pop(),
-
+              /// Si le mode menteur est activé
+              /// Seul le joueur en cours voit ses cartes
+              /// Sinon tout le monde voit les cartes de tout le monde
+              if(liarMode == false){
                 /// Lors du clic sur la zone, ca disparait
-                child: Dialog(
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(30),
-                  ),
-                  child: this.playersList!.length > 0 ? CustomScrollView(
-                    shrinkWrap: true,
-                    slivers: <Widget>[
-                      SliverPadding(
-                        padding: const EdgeInsets.all(10.0),
-                        sliver: SliverList(
-                          delegate: SliverChildListDelegate(
-                            List.generate(
-                              this.playersList!.length,
-                              (index) {
-                                return ListTile(
-                                  leading: Icon(Icons.account_circle_outlined, color: Colors.black, size: 60,),
-                                  title: Padding(
-                                    padding: const EdgeInsets.all(8.0),
-                                    child: Text('Cartes de ' + this.playersList![index]!.name!, style: TextStyle(fontSize: 30),),
-                                  ),
-                                  subtitle: this.playersList![index]!.deck.length > 0 ? Container(
-                                    width: size.width,
-                                    height: 120,
-                                    child: liarMode == true ? GridView.count(
-                                      mainAxisSpacing: 10.0,
-                                      crossAxisSpacing: 10.0,
-                                      crossAxisCount: 4,
-                                      scrollDirection: Axis.vertical,
-                                      children: List.generate(this.playersList![index]!.deck.length, (cardIndex){
-                                        if(this.playersList![index]!.name == this.playersList![this.currPlayer!]!.name){
-                                          return Container(child: this.playersList![this.currPlayer!]!.deck[cardIndex]!.img, width: 200, height: 300,);
-                                        }else{
-                                          return Image.asset('assets/backgrounds/components/cardBackBlack.png', fit: BoxFit.cover, width: size.width, height: size.height,);
-                                        }
-                                      }),
-                                    ) : GridView.count(
-                                      crossAxisCount: 4,
-                                      scrollDirection: Axis.vertical,
-                                      children: List.generate(this.playersList![index]!.deck.length, (cardIndex){
-                                          return Center(child: Container(child: this.playersList![index]!.deck[cardIndex]!.img, width: this.playersList![index]!.deck[cardIndex]!.img!.width, height: this.playersList![index]!.deck[cardIndex]!.img!.height,));
-                                      }),
+                return GestureDetector(
+                  onTap: () => Navigator.of(context).pop(),
+                  child: Dialog(
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(30),
+                    ),
+                    child: playersList!.length > 0 ? CustomScrollView(
+                      shrinkWrap: true,
+                      slivers: <Widget>[
+                        SliverPadding(
+                          padding: const EdgeInsets.all(10.0),
+                          sliver: SliverList(
+                            delegate: SliverChildListDelegate(
+                              List.generate(
+                                this.playersList!.length,
+                                    (index) {
+                                  return ListTile(
+                                    leading: Icon(Icons.account_circle_outlined, color: Colors.black, size: 60,),
+                                    title: Padding(
+                                      padding: const EdgeInsets.all(8.0),
+                                      child: Text('Cartes de ' + this.playersList![index]!.name!, style: TextStyle(fontSize: 30),),
                                     ),
-                                  ) : Center(child: CircularProgressIndicator(),),
-                                );
-                              },
+                                    subtitle: this.playersList![index]!.deck.length > 0 ? Container(
+                                      width: size.width,
+                                      height: 120,
+                                      child: liarMode == true ? GridView.count(
+                                        mainAxisSpacing: 10.0,
+                                        crossAxisSpacing: 10.0,
+                                        crossAxisCount: 4,
+                                        scrollDirection: Axis.vertical,
+                                        children: List.generate(this.playersList![index]!.deck.length, (cardIndex){
+                                          if(this.playersList![index]!.name == this.playersList![this.currPlayer!]!.name){
+                                            return Container(child: this.playersList![this.currPlayer!]!.deck[cardIndex]!.img, width: 200, height: 300,);
+                                          }else{
+                                            return Image.asset('assets/backgrounds/components/cardBackBlack.png', fit: BoxFit.cover, width: size.width, height: size.height,);
+                                          }
+                                        }),
+                                      ) : GridView.count(
+                                        crossAxisCount: 4,
+                                        scrollDirection: Axis.vertical,
+                                        children: List.generate(this.playersList![index]!.deck.length, (cardIndex){
+                                          return Center(child: Container(child: this.playersList![index]!.deck[cardIndex]!.img, width: this.playersList![index]!.deck[cardIndex]!.img!.width, height: this.playersList![index]!.deck[cardIndex]!.img!.height,));
+                                        }),
+                                      ),
+                                    ) : Center(child: CircularProgressIndicator(),),
+                                  );
+                                },
+                              ),
                             ),
                           ),
                         ),
-                      ),
-                    ],
-                  ) : Center(child: CircularProgressIndicator(),),
-                ),
-              );
+                      ],
+                    ) : Center(child: CircularProgressIndicator(),),
+                  ),
+                );
+              }else{
+                return GestureDetector(
+                  onTap: () => Navigator.of(context).pop(),
+                  /// Lors du clic sur la zone, ca disparait
+                  child: Center(
+                    child: GridView.builder(
+                        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                          mainAxisSpacing: 10.0,
+                          crossAxisSpacing: 5.0,
+                          crossAxisCount: 2,
+                        ),
+                        itemCount: this.playersList![this.currPlayer!]!.deck.length,
+                        itemBuilder: (BuildContext context, int index) {
+                          return Center(child: Image(image: this.playersList![this.currPlayer!]!.deck[index]!.img!.image,));
+                        }
+                    ),
+                  ),
+                );
+              }
             },
           );
         },

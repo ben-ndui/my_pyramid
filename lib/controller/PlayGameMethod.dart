@@ -97,7 +97,7 @@ class PlayController {
           firstBtnImageURL: "assets/backgrounds/components/minusBtn.png",
           secondBtnImageURL: "assets/backgrounds/components/upBtn.png",
           nextScreenName: "InOutScreen",
-          nextScreenMessage: "Aller hop, \n IN or OUT !!!",
+          nextScreenMessage: "Aller hop, \n Intérieur ou Extérieur !!!",
           gameDeck: this.gameDeck,
           currPlayer: currPlayer,
         );
@@ -110,7 +110,7 @@ class PlayController {
           firstBtnImageURL: "assets/backgrounds/components/in-btn.png",
           secondBtnImageURL: "assets/backgrounds/components/out-btn.png",
           nextScreenName: "CardSymboleScreen",
-          nextScreenMessage: "Aller hop, \n CARD COLOR !!!",
+          nextScreenMessage: "Aller hop, \n devine le symbole !!!",
           gameDeck: this.gameDeck,
           currPlayer: this.currPlayer,
         );
@@ -420,7 +420,8 @@ class PlayController {
                   secondBtnImageURL:
                       "assets/backgrounds/components/blackChoice.png",
                   nextScreenName: nextScreenName,
-                  nextScreenMessage: "Plus ou Moins \n Que ta carte précédente ? \n Tu peux désormais voir tes cartes, n'oublie pas !",
+                  nextScreenMessage:
+                      "Plus ou Moins \n Que ta carte précédente ? \n Tu peux désormais voir tes cartes, n'oublie pas !",
                   gameDeck: this.gameDeck,
                   currPlayer: this.currPlayer,
                 ),

@@ -11,7 +11,9 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'My Pyramid',
-      theme: ThemeData(fontFamily: 'Stella',),
+      theme: ThemeData(
+        fontFamily: 'Stella',
+      ),
       home: Loader(),
       debugShowCheckedModeBanner: false,
     );
