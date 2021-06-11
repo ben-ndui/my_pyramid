@@ -136,59 +136,36 @@ class _GameBodyState extends State<GameBody> {
 
   @override
   Widget build(BuildContext context) {
-    return WillPopScope(
-      onWillPop: () {
-        showDialog(
-          context: context,
-          builder: (context) => AlertDialog(
-            title: Text(
-              "Tour ${this.tour}",
-            ),
-            content: Text(
-              "On ne peut plus retourner en arrière a partir de maintenant !",
-            ),
-            actions: [
-              TextButton(
-                onPressed: () {
-                  Navigator.of(context).pop();
-                },
-                child: Text("🍺", style: TextStyle(fontSize: 35),),
-              ),
-            ],
+    return Container(
+      child: Column(
+        children: [
+          TopQuitButton(),
+          displayCard(
+            context,
+            Image.asset("assets/backgrounds/components/cardBack.png"),
           ),
-        ) as Future<bool>;
-      } as Future<bool> Function()?,
-      child: Container(
-        child: Column(
-          children: [
-            TopQuitButton(),
-            displayCard(
-              context,
-              Image.asset("assets/backgrounds/components/cardBack.png"),
-            ),
-            Center(
-              child: Text(
-                "${this.playersList![this.currPlayer!]!.name}",
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 50,
-                  fontWeight: FontWeight.w200,
-                ),
+          Center(
+            child: Text(
+              "${this.playersList![this.currPlayer!]!.name}",
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: 50,
+                fontWeight: FontWeight.w200,
               ),
             ),
-            answerButton(
-              "red",
-              "black",
-              firstBtnImageURL,
-              secondBtnImageURL,
-            ),
-            CheckMyDeck(
-              playersList: this.playersList,
-              currPlayer: this.currPlayer,
-            )
-          ],
-        ),
+          ),
+          answerButton(
+            "red",
+            "black",
+            firstBtnImageURL,
+            secondBtnImageURL,
+          ),
+          CheckMyDeck(
+            playersList: this.playersList,
+            currPlayer: this.currPlayer,
+          )
+        ],
       ),
     );
   }
