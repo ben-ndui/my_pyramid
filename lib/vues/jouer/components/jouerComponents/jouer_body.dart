@@ -85,58 +85,62 @@ class _JouerBodyState extends State<JouerBody> {
 
                             /// Si le nombre de joueur est suffisant, je lance le jeu ->
                             /// Redirection vers first setp of the game
-                            if (this.playersList.length > 0) {
-                              Navigator.push(
-                                context,
-                                PageRouteBuilder(
-                                  transitionDuration: Duration(
-                                    milliseconds: 1000,
+
+                            if(temp != null){///Si on entre un joueur sans valider!
+                              addPlayer(context);
+                              if (this.playersList.length > 0) {
+                                Navigator.push(
+                                  context,
+                                  PageRouteBuilder(
+                                    transitionDuration: Duration(
+                                      milliseconds: 1000,
+                                    ),
+                                    transitionsBuilder: (context, animation,
+                                        animationTime, child) {
+                                      animation = CurvedAnimation(
+                                        parent: animation,
+                                        curve: Curves.elasticInOut,
+                                      );
+                                      return ScaleTransition(
+                                        alignment: Alignment.center,
+                                        scale: animation,
+                                        child: child,
+                                      );
+                                    },
+                                    pageBuilder:
+                                        (context, animation, animationTime) {
+                                      return GameScreen(
+                                        playersList: this.playersList,
+                                        tour: 1,
+                                        nextScreen: this.nextScreen,
+                                        nextScreenBackground:
+                                        "assets/backgrounds/fisrt.png",
+                                        firstBtnImageURL:
+                                        "assets/backgrounds/components/redChoice.png",
+                                        secondBtnImageURL:
+                                        "assets/backgrounds/components/blackChoice.png",
+                                        nextScreenName: "PlusOuMoinsScreen",
+                                        nextScreenMessage:
+                                        "Allez hop, \n Plus ou Moins !!",
+                                        gameDeck: this.gameDeck,
+                                        currPlayer: 0,
+                                      );
+                                    },
                                   ),
-                                  transitionsBuilder: (context, animation,
-                                      animationTime, child) {
-                                    animation = CurvedAnimation(
-                                      parent: animation,
-                                      curve: Curves.elasticInOut,
-                                    );
-                                    return ScaleTransition(
-                                      alignment: Alignment.center,
-                                      scale: animation,
-                                      child: child,
-                                    );
-                                  },
-                                  pageBuilder:
-                                      (context, animation, animationTime) {
-                                    return GameScreen(
-                                      playersList: this.playersList,
-                                      tour: 1,
-                                      nextScreen: this.nextScreen,
-                                      nextScreenBackground:
-                                          "assets/backgrounds/fisrt.png",
-                                      firstBtnImageURL:
-                                          "assets/backgrounds/components/redChoice.png",
-                                      secondBtnImageURL:
-                                          "assets/backgrounds/components/blackChoice.png",
-                                      nextScreenName: "PlusOuMoinsScreen",
-                                      nextScreenMessage:
-                                          "Allez hop, \n Plus ou Moins !!",
-                                      gameDeck: this.gameDeck,
-                                      currPlayer: 0,
+                                );
+                              } else {
+                                showDialog(
+                                  context: context,
+                                  builder: (BuildContext context) {
+                                    return CustomDialogBox(
+                                      title: "Bruuuh",
+                                      descriptions:
+                                      "On peut pas jouer la, tu n'as entré aucun joueur.. ",
+                                      text: "Okay",
                                     );
                                   },
-                                ),
-                              );
-                            } else {
-                              showDialog(
-                                context: context,
-                                builder: (BuildContext context) {
-                                  return CustomDialogBox(
-                                    title: "Bruuuh",
-                                    descriptions:
-                                        "On peut pas jouer la, tu n'as entré aucun joueur.. ",
-                                    text: "Okay",
-                                  );
-                                },
-                              );
+                                );
+                              }
                             }
                           },
                         );
@@ -206,7 +210,7 @@ class _JouerBodyState extends State<JouerBody> {
   Container playButton(BuildContext context) {
     return Container(
       alignment: Alignment.bottomCenter,
-      margin: EdgeInsets.only(bottom: 10),
+      margin: EdgeInsets.only(bottom: 15),
       child: TextButton(
         style: TextButton.styleFrom(
           padding: EdgeInsets.all(5),
@@ -219,55 +223,59 @@ class _JouerBodyState extends State<JouerBody> {
           setState(
             () {
               this.gameDeck.initDeck();
-              if (this.playersList.length > 0) {
-                Navigator.push(
-                  context,
-                  PageRouteBuilder(
-                    transitionDuration: Duration(
-                      milliseconds: 1000,
+              if(temp != null) {
+                addPlayer(context);
+                ///Si on entre un joueur sans valider!
+                if (this.playersList.length > 0) {
+                  Navigator.push(
+                    context,
+                    PageRouteBuilder(
+                      transitionDuration: Duration(
+                        milliseconds: 1000,
+                      ),
+                      transitionsBuilder:
+                          (context, animation, animationTime, child) {
+                        animation = CurvedAnimation(
+                          parent: animation,
+                          curve: Curves.elasticInOut,
+                        );
+                        return ScaleTransition(
+                          alignment: Alignment.center,
+                          scale: animation,
+                          child: child,
+                        );
+                      },
+                      pageBuilder: (context, animation, animationTime) {
+                        return GameScreen(
+                          playersList: this.playersList,
+                          tour: 1,
+                          nextScreen: this.nextScreen,
+                          nextScreenBackground: "assets/backgrounds/fisrt.png",
+                          firstBtnImageURL:
+                          "assets/backgrounds/components/redChoice.png",
+                          secondBtnImageURL:
+                          "assets/backgrounds/components/blackChoice.png",
+                          nextScreenName: "PlusOuMoinsScreen",
+                          nextScreenMessage: "Allez hop, \n Plus ou Moins !!",
+                          gameDeck: this.gameDeck,
+                          currPlayer: 0,
+                        );
+                      },
                     ),
-                    transitionsBuilder:
-                        (context, animation, animationTime, child) {
-                      animation = CurvedAnimation(
-                        parent: animation,
-                        curve: Curves.elasticInOut,
-                      );
-                      return ScaleTransition(
-                        alignment: Alignment.center,
-                        scale: animation,
-                        child: child,
-                      );
-                    },
-                    pageBuilder: (context, animation, animationTime) {
-                      return GameScreen(
-                        playersList: this.playersList,
-                        tour: 1,
-                        nextScreen: this.nextScreen,
-                        nextScreenBackground: "assets/backgrounds/fisrt.png",
-                        firstBtnImageURL:
-                            "assets/backgrounds/components/redChoice.png",
-                        secondBtnImageURL:
-                            "assets/backgrounds/components/blackChoice.png",
-                        nextScreenName: "PlusOuMoinsScreen",
-                        nextScreenMessage: "Allez hop, \n Plus ou Moins !!",
-                        gameDeck: this.gameDeck,
-                        currPlayer: 0,
+                  );
+                } else {
+                  showDialog(
+                    context: context,
+                    builder: (BuildContext context) {
+                      return CustomDialogBox(
+                        title: "Bruuuh",
+                        descriptions:
+                        "On peut pas jouer la, tu n'as entré aucun joueur.. ",
+                        text: "Okay",
                       );
                     },
-                  ),
-                );
-              } else {
-                showDialog(
-                  context: context,
-                  builder: (BuildContext context) {
-                    return CustomDialogBox(
-                      title: "Bruuuh",
-                      descriptions:
-                          "On peut pas jouer la, tu n'as entré aucun joueur.. ",
-                      text: "Okay",
-                    );
-                  },
-                );
+                  );
+                }
               }
             },
           );
