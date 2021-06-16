@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:my_pyramid/model/Splash.dart';
 import 'package:my_pyramid/vues/intermediaire/inter.dart';
 
@@ -13,6 +14,7 @@ class _SplashBodyState extends State<SplashBody> {
     var size = MediaQuery.of(context).size;
     return Stack(
       alignment: Alignment.center,
+      fit: StackFit.expand,
       children: [
         Container(
           width: size.width,
@@ -22,6 +24,9 @@ class _SplashBodyState extends State<SplashBody> {
             itemBuilder: (context, index) {
               return GestureDetector(
                 child: Container(
+                  decoration: BoxDecoration(
+                    color: Color(0xFFFFFFFF),
+                  ),
                   child: Image.asset(
                     "assets/splashScreens/${splashList[index].name}.jpg",
                     width: size.width,

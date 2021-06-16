@@ -88,59 +88,97 @@ class _JouerBodyState extends State<JouerBody> {
 
                             if(temp != null){///Si on entre un joueur sans valider!
                               addPlayer(context);
-                              if (this.playersList.length > 0) {
-                                Navigator.push(
-                                  context,
-                                  PageRouteBuilder(
-                                    transitionDuration: Duration(
-                                      milliseconds: 1000,
-                                    ),
-                                    transitionsBuilder: (context, animation,
-                                        animationTime, child) {
-                                      animation = CurvedAnimation(
-                                        parent: animation,
-                                        curve: Curves.elasticInOut,
-                                      );
-                                      return ScaleTransition(
-                                        alignment: Alignment.center,
-                                        scale: animation,
-                                        child: child,
-                                      );
-                                    },
-                                    pageBuilder:
-                                        (context, animation, animationTime) {
-                                      return GameScreen(
-                                        playersList: this.playersList,
-                                        tour: 1,
-                                        nextScreen: this.nextScreen,
-                                        nextScreenBackground:
-                                        "assets/backgrounds/fisrt.png",
-                                        firstBtnImageURL:
-                                        "assets/backgrounds/components/redChoice.png",
-                                        secondBtnImageURL:
-                                        "assets/backgrounds/components/blackChoice.png",
-                                        nextScreenName: "PlusOuMoinsScreen",
-                                        nextScreenMessage:
-                                        "Allez hop, \n Plus ou Moins !!",
-                                        gameDeck: this.gameDeck,
-                                        currPlayer: 0,
-                                      );
-                                    },
+                              Navigator.push(
+                                context,
+                                PageRouteBuilder(
+                                  transitionDuration: Duration(
+                                    milliseconds: 1000,
                                   ),
-                                );
-                              } else {
-                                showDialog(
-                                  context: context,
-                                  builder: (BuildContext context) {
-                                    return CustomDialogBox(
-                                      title: "Bruuuh",
-                                      descriptions:
-                                      "On peut pas jouer la, tu n'as entré aucun joueur.. ",
-                                      text: "Okay",
+                                  transitionsBuilder: (context, animation,
+                                      animationTime, child) {
+                                    animation = CurvedAnimation(
+                                      parent: animation,
+                                      curve: Curves.elasticInOut,
+                                    );
+                                    return ScaleTransition(
+                                      alignment: Alignment.center,
+                                      scale: animation,
+                                      child: child,
                                     );
                                   },
-                                );
-                              }
+                                  pageBuilder:
+                                      (context, animation, animationTime) {
+                                    return GameScreen(
+                                      playersList: this.playersList,
+                                      tour: 1,
+                                      nextScreen: this.nextScreen,
+                                      nextScreenBackground:
+                                      "assets/backgrounds/fisrt.png",
+                                      firstBtnImageURL:
+                                      "assets/backgrounds/components/redChoice.png",
+                                      secondBtnImageURL:
+                                      "assets/backgrounds/components/blackChoice.png",
+                                      nextScreenName: "PlusOuMoinsScreen",
+                                      nextScreenMessage:
+                                      "Allez hop, \n Plus ou Moins !!",
+                                      gameDeck: this.gameDeck,
+                                      currPlayer: 0,
+                                    );
+                                  },
+                                ),
+                              );
+                            }else if (this.playersList.length > 0) {
+                              Navigator.push(
+                                context,
+                                PageRouteBuilder(
+                                  transitionDuration: Duration(
+                                    milliseconds: 1000,
+                                  ),
+                                  transitionsBuilder: (context, animation,
+                                      animationTime, child) {
+                                    animation = CurvedAnimation(
+                                      parent: animation,
+                                      curve: Curves.elasticInOut,
+                                    );
+                                    return ScaleTransition(
+                                      alignment: Alignment.center,
+                                      scale: animation,
+                                      child: child,
+                                    );
+                                  },
+                                  pageBuilder:
+                                      (context, animation, animationTime) {
+                                    return GameScreen(
+                                      playersList: this.playersList,
+                                      tour: 1,
+                                      nextScreen: this.nextScreen,
+                                      nextScreenBackground:
+                                      "assets/backgrounds/fisrt.png",
+                                      firstBtnImageURL:
+                                      "assets/backgrounds/components/redChoice.png",
+                                      secondBtnImageURL:
+                                      "assets/backgrounds/components/blackChoice.png",
+                                      nextScreenName: "PlusOuMoinsScreen",
+                                      nextScreenMessage:
+                                      "Allez hop, \n Plus ou Moins !!",
+                                      gameDeck: this.gameDeck,
+                                      currPlayer: 0,
+                                    );
+                                  },
+                                ),
+                              );
+                            } else {
+                              showDialog(
+                                context: context,
+                                builder: (BuildContext context) {
+                                  return CustomDialogBox(
+                                    title: "Bruuuh",
+                                    descriptions:
+                                    "On peut pas jouer la, tu n'as entré aucun joueur.. ",
+                                    text: "Okay",
+                                  );
+                                },
+                              );
                             }
                           },
                         );
@@ -158,7 +196,7 @@ class _JouerBodyState extends State<JouerBody> {
             ),
           ),
           Container(
-            margin: EdgeInsets.only(top: size.height / 5),
+            margin: EdgeInsets.only(top: 220.0),
             // color: Colors.green,
             height: MediaQuery.of(context).size.height,
             child: ListView.builder(
@@ -223,59 +261,99 @@ class _JouerBodyState extends State<JouerBody> {
           setState(
             () {
               this.gameDeck.initDeck();
-              if(temp != null) {
+              if(temp != null){///Si on entre un joueur sans valider!
                 addPlayer(context);
-                ///Si on entre un joueur sans valider!
-                if (this.playersList.length > 0) {
-                  Navigator.push(
-                    context,
-                    PageRouteBuilder(
-                      transitionDuration: Duration(
-                        milliseconds: 1000,
-                      ),
-                      transitionsBuilder:
-                          (context, animation, animationTime, child) {
-                        animation = CurvedAnimation(
-                          parent: animation,
-                          curve: Curves.elasticInOut,
-                        );
-                        return ScaleTransition(
-                          alignment: Alignment.center,
-                          scale: animation,
-                          child: child,
-                        );
-                      },
-                      pageBuilder: (context, animation, animationTime) {
-                        return GameScreen(
-                          playersList: this.playersList,
-                          tour: 1,
-                          nextScreen: this.nextScreen,
-                          nextScreenBackground: "assets/backgrounds/fisrt.png",
-                          firstBtnImageURL:
-                          "assets/backgrounds/components/redChoice.png",
-                          secondBtnImageURL:
-                          "assets/backgrounds/components/blackChoice.png",
-                          nextScreenName: "PlusOuMoinsScreen",
-                          nextScreenMessage: "Allez hop, \n Plus ou Moins !!",
-                          gameDeck: this.gameDeck,
-                          currPlayer: 0,
-                        );
-                      },
+                Navigator.push(
+                  context,
+                  PageRouteBuilder(
+                    transitionDuration: Duration(
+                      milliseconds: 1000,
                     ),
-                  );
-                } else {
-                  showDialog(
-                    context: context,
-                    builder: (BuildContext context) {
-                      return CustomDialogBox(
-                        title: "Bruuuh",
-                        descriptions:
-                        "On peut pas jouer la, tu n'as entré aucun joueur.. ",
-                        text: "Okay",
+                    transitionsBuilder: (context, animation,
+                        animationTime, child) {
+                      animation = CurvedAnimation(
+                        parent: animation,
+                        curve: Curves.elasticInOut,
+                      );
+                      return ScaleTransition(
+                        alignment: Alignment.center,
+                        scale: animation,
+                        child: child,
                       );
                     },
-                  );
-                }
+                    pageBuilder:
+                        (context, animation, animationTime) {
+                      return GameScreen(
+                        playersList: this.playersList,
+                        tour: 1,
+                        nextScreen: this.nextScreen,
+                        nextScreenBackground:
+                        "assets/backgrounds/fisrt.png",
+                        firstBtnImageURL:
+                        "assets/backgrounds/components/redChoice.png",
+                        secondBtnImageURL:
+                        "assets/backgrounds/components/blackChoice.png",
+                        nextScreenName: "PlusOuMoinsScreen",
+                        nextScreenMessage:
+                        "Allez hop, \n Plus ou Moins !!",
+                        gameDeck: this.gameDeck,
+                        currPlayer: 0,
+                      );
+                    },
+                  ),
+                );
+              }else if (this.playersList.length > 0) {
+                Navigator.push(
+                  context,
+                  PageRouteBuilder(
+                    transitionDuration: Duration(
+                      milliseconds: 1000,
+                    ),
+                    transitionsBuilder: (context, animation,
+                        animationTime, child) {
+                      animation = CurvedAnimation(
+                        parent: animation,
+                        curve: Curves.elasticInOut,
+                      );
+                      return ScaleTransition(
+                        alignment: Alignment.center,
+                        scale: animation,
+                        child: child,
+                      );
+                    },
+                    pageBuilder:
+                        (context, animation, animationTime) {
+                      return GameScreen(
+                        playersList: this.playersList,
+                        tour: 1,
+                        nextScreen: this.nextScreen,
+                        nextScreenBackground:
+                        "assets/backgrounds/fisrt.png",
+                        firstBtnImageURL:
+                        "assets/backgrounds/components/redChoice.png",
+                        secondBtnImageURL:
+                        "assets/backgrounds/components/blackChoice.png",
+                        nextScreenName: "PlusOuMoinsScreen",
+                        nextScreenMessage:
+                        "Allez hop, \n Plus ou Moins !!",
+                        gameDeck: this.gameDeck,
+                        currPlayer: 0,
+                      );
+                    },
+                  ),
+                );
+              } else {
+                showDialog(
+                  context: context,
+                  builder: (BuildContext context) {
+                    return CustomDialogBox(
+                      title: "Bruuuh",
+                      descriptions:
+                      "On peut pas jouer la, tu n'as entré aucun joueur.. ",
+                      text: "Okay",
+                    );
+                  },
+                );
               }
             },
           );

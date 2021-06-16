@@ -185,11 +185,8 @@ class _SmoothPyramidBodyState extends State<SmoothPyramidBody> {
 
   @override
   Widget build(BuildContext context) {
-
     return Container(
-      padding: EdgeInsets.only(
-        top: MediaQuery.of(context).size.width / 5,
-      ),
+      padding: EdgeInsets.only(top: 10.0),
       child: Column(
         children: [
           /** Ici le block du bouton quitter */
@@ -245,36 +242,40 @@ class _SmoothPyramidBodyState extends State<SmoothPyramidBody> {
             children: [
               GestureDetector(
                 onTap: () {
-                  setState(() {
-                    this.card =
-                        this.playersList![this.currPlayer]!.getRandCard();
-                    this.url2 = this.card!.img;
-                    this
-                        .playersList![currPlayer]!
-                        .playController
-                        .questionTime(this.card!, context);
-                  });
+                  setState(
+                    () {
+                      this.card =
+                          this.playersList![this.currPlayer]!.getRandCard();
+                      this.url2 = this.card!.img;
+                      this
+                          .playersList![currPlayer]!
+                          .playController
+                          .questionTime(this.card!, context);
+                    },
+                  );
                 },
                 child: Container(
-                  margin: EdgeInsets.only(left: 100),
+                  margin: EdgeInsets.only(left: 85, right: 2.0),
                   width: 75.0,
                   child: url2, //image
                 ),
               ),
               GestureDetector(
                 onTap: () {
-                  setState(() {
-                    this.card =
-                        this.playersList![this.currPlayer]!.getRandCard();
-                    this.url3 = this.card!.img;
-                    this
-                        .playersList![currPlayer]!
-                        .playController
-                        .questionTime(this.card!, context);
-                  });
+                  setState(
+                    () {
+                      this.card =
+                          this.playersList![this.currPlayer]!.getRandCard();
+                      this.url3 = this.card!.img;
+                      this
+                          .playersList![currPlayer]!
+                          .playController
+                          .questionTime(this.card!, context);
+                    },
+                  );
                 },
                 child: Container(
-                  margin: EdgeInsets.only(right: 100),
+                  margin: EdgeInsets.only(right: 80),
                   width: 75.0,
                   child: url3, //image
                 ),
@@ -397,7 +398,7 @@ class _SmoothPyramidBodyState extends State<SmoothPyramidBody> {
                   });
                 },
                 child: Container(
-                  margin: EdgeInsets.only(left: 1.0, right: 1.0),
+                  margin: EdgeInsets.only(left: 2.0, right: 2.0),
                   width: 75.0,
                   child: url9, //image
                 ),
